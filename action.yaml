@@ -1,0 +1,32 @@
+name: 'New Relic Application Deployment Marker'
+author: 'New Relic'
+description: 'Apply a New Relic application deployment marker to an application that is monitored by New Relic.'
+branding:
+  icon: 'upload-cloud'
+  color: 'blue'
+inputs:
+  api_key:
+    description: 'Your New Relic Personal API Key.'
+    required: true
+  region:
+    description: 'The geographical region for your New Relic account - US or EU. Default: US'
+    required: false
+    default: US
+  applicationId:
+    description: 'The application ID to apply the deployment marker.'
+    required: true
+  revision:
+    description: 'Custom revision information to add to the deployment marker - e.g. the latest tag.'
+    required: false
+  accountId:
+    description: 'Your New Relic account ID. This account ID should have access to the specified application.'
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    NEW_RELIC_API_KEY: ${{ inputs.api_key }}
+    NEW_RELIC_REGION: ${{ inputs.region }}
+    APPLICATION_ID: ${{ inputs.applicationId }}
+    REVISION: ${{ inputs.revision }}
+    ACCOUNT_ID: ${{ inputs.accountId }}
