@@ -21,6 +21,10 @@ inputs:
   accountId:
     description: 'Your New Relic account ID. This account ID should have access to the specified application.'
     required: false
+  user:
+    description: 'The user creating the deployment. Default: ${{ github.actor }}'
+    required: false
+    default: ${{ github.actor }}
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -30,3 +34,4 @@ runs:
     APPLICATION_ID: ${{ inputs.applicationId }}
     REVISION: ${{ inputs.revision }}
     ACCOUNT_ID: ${{ inputs.accountId }}
+    NEW_RELIC_DEPLOYMENT_USER: ${{ inputs.user }}

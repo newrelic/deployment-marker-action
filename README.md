@@ -14,6 +14,7 @@ A GitHub Action to add New Relic deployment markers during your release pipeline
 | `region`        | optional | The region of your New Relic account. Default: "US"                                                                                      |
 | `revision`      | optional | Metadata to apply to the deployment marker - e.g. the latest release tag                                                                 |
 | `accountId`     | optional | The account number the application falls under. This could also be a subaccount.                                                         |
+| `user`          | optional | The user creating the deployment. Default: ${{ github.actor }}                                                                           |
 
 ## Example usage
 
@@ -34,4 +35,5 @@ jobs:
           revision: ${{ github.ref }}-${{ github.sha }}  # optional
           region: US                                     # optional
           accountId: <your New Relic account ID>         # optional
+          user: ${{ github.actor }}                      # optional
 ```
