@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Apply New Relic deployment marker
-        uses: sanderblue/newrelic-deployment-marker@master
+        uses: newrelic/deployment-marker-action@master
         with:
           api_key: ${{ secrets.NEW_RELIC_API_KEY }}
           applicationId: <your application ID>
