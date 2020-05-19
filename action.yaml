@@ -33,5 +33,5 @@ runs:
     NEW_RELIC_REGION: ${{ inputs.region }}
     APPLICATION_ID: ${{ inputs.applicationId }}
     REVISION: ${{ inputs.revision }}
-    ACCOUNT_ID: ${{ inputs.accountId }}
+    NEW_RELIC_ACCOUNT_ID: ${{ inputs.accountId }}
     NEW_RELIC_DEPLOYMENT_USER: ${{ inputs.user }}
