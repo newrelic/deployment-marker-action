@@ -1,7 +1,7 @@
 # New Relic Application Deployment Marker
 New Relic App Deployment Marker
 
-[![GitHub Marketplace version](https://img.shields.io/github/release/sanderblue/newrelic-deployment-marker.svg?label=Marketplace&logo=github)](https://github.com/marketplace/actions/new-relic-app-deployment-marker)
+[![GitHub Marketplace version](https://img.shields.io/github/release/newrelic/deployment-marker-action.svg?label=Marketplace&logo=github)](https://github.com/marketplace/actions/new-relic-application-deployment-marker)
 
 A GitHub Action to add New Relic deployment markers during your release pipeline.
 
