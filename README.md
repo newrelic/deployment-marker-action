@@ -30,8 +30,8 @@ jobs:
         uses: sanderblue/newrelic-deployment-marker@master
         with:
           api_key: ${{ secrets.NEW_RELIC_API_KEY }}
-          applicationId: 123456789
-          region: US
-          revision: ${{ github.ref }}-${{ github.sha }}
-          accountId: 6543210
+          applicationId: <your application ID>
+          revision: ${{ github.ref }}-${{ github.sha }}  # optional
+          region: US                                     # optional
+          accountId: <your New Relic account ID>         # optional
 ```
