@@ -9,7 +9,7 @@ A GitHub Action to add New Relic deployment markers during your release pipeline
 
 | Key             |          | Description                                                                                                                              |
 | --------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `api_key`       | required | Your New Relic [personal API key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#personal-api-key). |
+| `apiKey`        | required | Your New Relic [personal API key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#personal-api-key). |
 | `applicationId` | required | The New Relic application ID to apply the deployment marker.                                                                             |
 | `region`        | optional | The region of your New Relic account. Default: "US"                                                                                      |
 | `revision`      | optional | Metadata to apply to the deployment marker - e.g. the latest release tag                                                                 |
@@ -30,7 +30,7 @@ jobs:
       - name: Apply New Relic deployment marker
         uses: newrelic/deployment-marker-action@master
         with:
-          api_key: ${{ secrets.NEW_RELIC_API_KEY }}
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           applicationId: <your application ID>
           revision: ${{ github.ref }}-${{ github.sha }}  # optional
           region: US                                     # optional

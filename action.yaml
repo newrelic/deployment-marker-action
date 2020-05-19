@@ -5,7 +5,7 @@ branding:
   icon: 'upload-cloud'
   color: 'blue'
 inputs:
-  api_key:
+  apiKey:
     description: 'Your New Relic Personal API Key.'
     required: true
   region:
@@ -29,7 +29,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    NEW_RELIC_API_KEY: ${{ inputs.api_key }}
+    NEW_RELIC_API_KEY: ${{ inputs.apiKey }}
     NEW_RELIC_REGION: ${{ inputs.region }}
     APPLICATION_ID: ${{ inputs.applicationId }}
     REVISION: ${{ inputs.revision }}
