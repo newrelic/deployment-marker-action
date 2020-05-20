@@ -1,33 +1,33 @@
-name: 'New Relic Application Deployment Marker'
-author: 'New Relic'
-description: 'Apply a New Relic application deployment marker to an application that is monitored by New Relic.'
+name: "New Relic Application Deployment Marker"
+author: "New Relic"
+description: "Apply a New Relic application deployment marker to an application that is monitored by New Relic."
 branding:
-  icon: 'upload-cloud'
-  color: 'blue'
+  icon: "upload-cloud"
+  color: "blue"
 inputs:
   apiKey:
-    description: 'Your New Relic Personal API Key.'
+    description: "Your New Relic Personal API Key."
     required: true
   region:
-    description: 'The geographical region for your New Relic account - US or EU. Default: US'
+    description: "The geographical region for your New Relic account - US or EU. Default: US"
     required: false
     default: US
   applicationId:
-    description: 'The application ID to apply the deployment marker.'
+    description: "The application ID to apply the deployment marker."
     required: true
   revision:
-    description: 'Custom revision information to add to the deployment marker - e.g. the latest tag.'
-    required: false
+    description: "Custom revision information to add to the deployment marker - e.g. the latest tag."
+    required: true
   accountId:
-    description: 'Your New Relic account ID. This account ID should have access to the specified application.'
+    description: "Your New Relic account ID. This account ID should have access to the specified application."
     required: false
   user:
-    description: 'The user creating the deployment. Default: ${{ github.actor }}'
+    description: "The user creating the deployment. Default: `github.actor`"
     required: false
-    default: ${{ github.actor }}
+    default: "${{ github.actor }}"
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
   env:
     NEW_RELIC_API_KEY: ${{ inputs.apiKey }}
     NEW_RELIC_REGION: ${{ inputs.region }}
