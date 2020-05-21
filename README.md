@@ -11,10 +11,10 @@ A GitHub Action to add New Relic deployment markers during your release pipeline
 | --------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `apiKey`        | required | Your New Relic [personal API key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#personal-api-key). |
 | `applicationId` | required | The New Relic application ID to apply the deployment marker.                                                                             |
-| `region`        | optional | The region of your New Relic account. Default: "US"                                                                                      |
-| `revision`      | optional | Metadata to apply to the deployment marker - e.g. the latest release tag                                                                 |
+| `revision`      | required | Metadata to apply to the deployment marker - e.g. the latest release tag                                                                 |
+| `user`          | optional | The user creating the deployment. Default: `github.actor`                                                                                |
+| `region`        | optional | The region of your New Relic account. Default: `US`                                                                                      |
 | `accountId`     | optional | The account number the application falls under. This could also be a subaccount.                                                         |
-| `user`          | optional | The user creating the deployment. Default: ${{ github.actor }}                                                                           |
 
 ## Example usage
 
@@ -32,8 +32,8 @@ jobs:
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           applicationId: <your application ID>
-          revision: ${{ github.ref }}-${{ github.sha }}  # optional
-          region: US                                     # optional
-          accountId: <your New Relic account ID>         # optional
-          user: ${{ github.actor }}                      # optional
+          revision: "${{ github.ref }}-${{ github.sha }}"
+          user: "${{ github.actor }}"                     # optional
+          region: US                                      # optional
+          accountId: <your New Relic account ID>          # optional
 ```

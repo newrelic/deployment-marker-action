@@ -1,0 +1,19 @@
+on: [push]
+
+jobs:
+  new_relic:
+    runs-on: ubuntu-latest
+    name: New Relic Deployment Marker GitHub Action
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Test deployment marker
+        uses: ./
+        with:
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          applicationId: ${{ secrets.APPLICATION_ID }}
+          revision: "deployment-marker-action-test-${{ github.sha }}"
+          user: "${{ github.actor }}"                                 # optional
+          region: US                                                  # optional
+          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}              # optional
