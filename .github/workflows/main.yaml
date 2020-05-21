@@ -1,9 +1,15 @@
-on: [push]
+name: Test Suite
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
 
 jobs:
-  example_1_workflow:
+  should_fail_test:
     runs-on: ubuntu-latest
-    name: New Relic Deployment Marker GitHub Action
+    name: Should Fail Test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -12,15 +18,12 @@ jobs:
         uses: ./
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          applicationId: ${{ secrets.APPLICATION_ID }}
-          revision: "deployment-marker-action-test-${{ github.sha }}"
-          user: "${{ github.actor }}"                                 # optional
-          region: US                                                  # optional
-          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}              # optional
+          applicationId: 0
+          revision: "deployment-marker-action-should-fail-test:${{ github.ref }}"
 
-  basic_usage_test:
+  basic_test:
     runs-on: ubuntu-latest
-    name: Basic usage test
+    name: Basic Usage Test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -31,3 +34,21 @@ jobs:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           applicationId: ${{ secrets.APPLICATION_ID }}
           revision: "deployment-marker-action-basic-test:${{ github.ref }}"
+
+  all_inputs_test:
+    runs-on: ubuntu-latest
+    name: All Inputs Test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Test deployment marker
+        uses: ./
+        with:
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          applicationId: ${{ secrets.APPLICATION_ID }}
+          revision: "deployment-marker-action-all-input-test-${{ github.sha }}"
+          user: "hardcoded-test-username"                             # optional
+          region: US                                                  # optional
+          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}              # optional
+
