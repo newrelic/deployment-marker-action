@@ -53,7 +53,7 @@ jobs:
           revision: "deployment-marker-action-all-input-test-${{ github.sha }}"
 
           # Optional
-          changelog: "See https://github.com/${{ github.repository }}/CHANGELOG.md for details"
+          changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"
           description: "Automated Deployment via Github Actions"
           region: ${{ secrets.NEW_RELIC_REGION }}
           user: "hardcoded-test-username"
