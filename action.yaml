@@ -8,18 +8,24 @@ inputs:
   apiKey:
     description: 'Your New Relic Personal API Key.'
     required: true
-  region:
-    description: 'The geographical region for your New Relic account - US or EU. Default: US'
-    required: false
-    default: US
+  accountId:
+    description: 'Your New Relic account ID. This account ID should have access to the specified application.'
+    required: true
   applicationId:
     description: 'The application ID to apply the deployment marker.'
     required: true
   revision:
     description: 'Custom revision information to add to the deployment marker - e.g. the latest tag.'
     required: true
-  accountId:
-    description: 'Your New Relic account ID. This account ID should have access to the specified application.'
+  region:
+    description: 'The geographical region for your New Relic account - US or EU. Default: US'
+    required: false
+    default: US
+  description:
+    description: 'Description stored with the deployment. Default: <none>'
+    required: false
+  changelog:
+    description: 'Change log string stored with the deployment. Default: <none>'
     required: false
   user:
     description: 'The user creating the deployment. Default: `github.actor`'
@@ -30,8 +36,10 @@ runs:
   image: 'Dockerfile'
   env:
     NEW_RELIC_API_KEY: ${{ inputs.apiKey }}
-    NEW_RELIC_REGION: ${{ inputs.region }}
-    APPLICATION_ID: ${{ inputs.applicationId }}
-    REVISION: ${{ inputs.revision }}
     NEW_RELIC_ACCOUNT_ID: ${{ inputs.accountId }}
+    NEW_RELIC_APPLICATION_ID: ${{ inputs.applicationId }}
+    NEW_RELIC_REGION: ${{ inputs.region }}
     NEW_RELIC_DEPLOYMENT_USER: ${{ inputs.user }}
+    NEW_RELIC_DEPLOYMENT_REVISION: ${{ inputs.revision }}
+    NEW_RELIC_DEPLOYMENT_CHANGE_LOG: ${{ inputs.changelog }}
+    NEW_RELIC_DEPLOYMENT_DESCRIPTION: ${{ inputs.description }}

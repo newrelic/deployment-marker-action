@@ -18,6 +18,7 @@ jobs:
 #        uses: ./
 #        with:
 #          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+#          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
 #          applicationId: 0
 #          revision: "deployment-marker-action-should-fail-test:${{ github.ref }}"
 
@@ -31,6 +32,7 @@ jobs:
       - name: Test deployment marker
         uses: ./
         with:
+          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           applicationId: ${{ secrets.APPLICATION_ID }}
           revision: "deployment-marker-action-basic-test:${{ github.ref }}"
@@ -45,10 +47,14 @@ jobs:
       - name: Test deployment marker
         uses: ./
         with:
+          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           applicationId: ${{ secrets.APPLICATION_ID }}
           revision: "deployment-marker-action-all-input-test-${{ github.sha }}"
-          user: "hardcoded-test-username"                             # optional
-          region: US                                                  # optional
-          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}              # optional
+
+          # Optional
+          changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"
+          description: "Automated Deployment via Github Actions"
+          region: ${{ secrets.NEW_RELIC_REGION }}
+          user: "hardcoded-test-username"
 

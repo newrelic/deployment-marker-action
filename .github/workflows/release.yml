@@ -1,14 +1,12 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*'
+  - release
 
 jobs:
   basic_test:
     runs-on: ubuntu-latest
-    name: Release marker example
+    name: Deployment marker example
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -20,6 +18,7 @@ jobs:
         uses: ./
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          applicationId: ${{ secrets.APPLICATION_ID }}
-          revision: "deployment-marker-action-release:${{ env.RELEASE_VERSION }}"
+          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+          applicationId: ${{ secrets.NEW_RELIC_APPLICATION_ID }}
+          revision: "${{ github.repository }}:${{ env.RELEASE_VERSION }}"
 
