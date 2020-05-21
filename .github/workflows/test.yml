@@ -7,19 +7,19 @@ on:
       - master
 
 jobs:
-  should_fail_test:
-    runs-on: ubuntu-latest
-    name: Should Fail Test
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Test deployment marker
-        uses: ./
-        with:
-          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          applicationId: 0
-          revision: "deployment-marker-action-should-fail-test:${{ github.ref }}"
+#  should_fail_test:
+#    runs-on: ubuntu-latest
+#    name: Should Fail Test
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v2
+#
+#      - name: Test deployment marker
+#        uses: ./
+#        with:
+#          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+#          applicationId: 0
+#          revision: "deployment-marker-action-should-fail-test:${{ github.ref }}"
 
   basic_test:
     runs-on: ubuntu-latest
