@@ -8,19 +8,19 @@ inputs:
   apiKey:
     description: 'Your New Relic Personal API Key.'
     required: true
-  region:
-    description: 'The geographical region for your New Relic account - US or EU. Default: US'
-    required: false
-    default: US
+  accountId:
+    description: 'Your New Relic account ID. This account ID should have access to the specified application.'
+    required: true
   applicationId:
     description: 'The application ID to apply the deployment marker.'
     required: true
   revision:
     description: 'Custom revision information to add to the deployment marker - e.g. the latest tag.'
     required: true
-  accountId:
-    description: 'Your New Relic account ID. This account ID should have access to the specified application.'
+  region:
+    description: 'The geographical region for your New Relic account - US or EU. Default: US'
     required: false
+    default: US
   user:
     description: 'The user creating the deployment. Default: `github.actor`'
     required: false

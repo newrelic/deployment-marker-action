@@ -18,6 +18,7 @@ jobs:
 #        uses: ./
 #        with:
 #          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+#          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
 #          applicationId: 0
 #          revision: "deployment-marker-action-should-fail-test:${{ github.ref }}"
 
@@ -32,6 +33,7 @@ jobs:
         uses: ./
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           applicationId: ${{ secrets.APPLICATION_ID }}
           revision: "deployment-marker-action-basic-test:${{ github.ref }}"
 
@@ -46,9 +48,9 @@ jobs:
         uses: ./
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           applicationId: ${{ secrets.APPLICATION_ID }}
           revision: "deployment-marker-action-all-input-test-${{ github.sha }}"
           user: "hardcoded-test-username"                             # optional
           region: US                                                  # optional
-          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}              # optional
 
