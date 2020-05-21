@@ -1,7 +1,7 @@
-<a name="unreleased"></a>
-## [Unreleased]
-
+<a name="v1.0.0"></a>
+## [v1.0.0] - 2020-05-21
 ### Bug Fixes
+- **docs:** Update example changelog URL to correct path on Github
 - **vars:** Make accountId required, update flows and docs
 
 ### Features
@@ -42,7 +42,8 @@
 ### Features
 - New Relic deployment marker action
 
-[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v1.0.0...HEAD
+[v1.0.0]: https://github.com/newrelic/deployment-marker-action/compare/v0.2.0...v1.0.0
 [v0.2.0]: https://github.com/newrelic/deployment-marker-action/compare/v0.1.2...v0.2.0
 [v0.1.2]: https://github.com/newrelic/deployment-marker-action/compare/v0.1.1...v0.1.2
 [v0.1.1]: https://github.com/newrelic/deployment-marker-action/compare/v0.1.0...v0.1.1
