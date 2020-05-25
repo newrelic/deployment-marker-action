@@ -62,7 +62,7 @@ options set.
 Github secrets assumed to be set:
 * `NEW_RELIC_ACCOUNT_ID` - New Relic Account ID the application is reporting to
 * `NEW_RELIC_API_KEY` - Personal API key
-* `NEW_RELIC_APPLIATION_ID` - New Relic Application ID to create the marker on
+* `NEW_RELIC_APPLICATION_ID` - New Relic Application ID to create the marker on
 
 ```yaml
 name: Release
