@@ -43,7 +43,7 @@ jobs:
     name: New Relic
     steps:
       - name: Set Release Version from Tag
-        run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF:10}
+        run: echo "RELEASE_VERSION=${GITHUB_REF:10}" >> $GITHUB_ENV
 
       - name: Create New Relic deployment marker
         uses: newrelic/deployment-marker-action@v1
@@ -87,4 +87,3 @@ jobs:
           region: ${{ secrets.NEW_RELIC_REGION }}
           user: "${{ github.actor }}"
 ```
-
