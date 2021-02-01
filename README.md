@@ -78,7 +78,7 @@ jobs:
         with:
           accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          applicationId: ${{ secrets.NEW_RELIC_APPLIATION_ID }}
+          applicationId: ${{ secrets.NEW_RELIC_APPLICATION_ID }}
           revision: "${{ github.ref }}-${{ github.sha }}"
 
           # Optional
