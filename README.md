@@ -6,7 +6,7 @@
 
 A GitHub Action to add New Relic deployment markers during your release pipeline.
 
-`Note` Deployment Markers are only supported by APM Applications.
+> Deployment Markers are only supported by APM Applications.
 
 ## Inputs
 
