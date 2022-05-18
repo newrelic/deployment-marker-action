@@ -1,6 +1,7 @@
 name: Test Suite
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
@@ -27,7 +28,7 @@ jobs:
     name: Basic Usage Test
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Test deployment marker
         uses: ./
@@ -42,7 +43,7 @@ jobs:
     name: All Inputs Test
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Test deployment marker
         uses: ./
@@ -57,4 +58,3 @@ jobs:
           description: "Automated Deployment via Github Actions"
           region: ${{ secrets.NEW_RELIC_REGION }}
           user: "hardcoded-test-username"
-
