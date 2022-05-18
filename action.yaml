@@ -6,7 +6,7 @@ branding:
   color: 'blue'
 inputs:
   apiKey:
-    description: 'Your New Relic Personal API Key.'
+    description: 'Your New Relic User API Key.'
     required: true
   accountId:
     description: 'Your New Relic account ID. This account ID should have access to the specified application.'
