@@ -35,7 +35,7 @@ jobs:
         with:
           accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          applicationId: ${{ secrets.APPLICATION_ID }}
+          applicationId: 99999999999999999
           revision: "deployment-marker-action-basic-test:${{ github.ref }}"
 
   all_inputs_test:
