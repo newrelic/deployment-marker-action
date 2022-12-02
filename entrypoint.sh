@@ -8,7 +8,7 @@ result=$(newrelic entity deployment create \
   --description "${NEW_RELIC_DEPLOYMENT_DESCRIPTION}" \
   --deepLink "${NEW_RELIC_DEPLOYMENT_DEEPLINK}" \
   --deploymentType "${NEW_RELIC_DEPLOYMENT_TYPE}" \
-  --groupID "${NEW_RELIC_DEPLOYMENT_GROUP_ID}" \
+  --groupId "${NEW_RELIC_DEPLOYMENT_GROUP_ID}" \
   2>&1)
 
 exitStatus=$?
