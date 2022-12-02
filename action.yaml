@@ -35,6 +35,9 @@ inputs:
     description: 'The user creating the deployment. Default: `github.actor`'
     required: false
     default: '${{ github.actor }}'
+  groupid:
+    description: 'Group Id used to link deployments together.'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -48,3 +51,4 @@ runs:
     NEW_RELIC_DEPLOYMENT_DESCRIPTION: ${{ inputs.description }}
     NEW_RELIC_DEPLOYMENT_DEEPLINK: ${{ inputs.deeplink }}
     NEW_RELIC_DEPLOYMENT_TYPE: ${{ inputs.deploymenttype }}
+    NEW_RELIC_DEPLOYMENT_GROUP_ID: ${{ inputs.groupid }}
