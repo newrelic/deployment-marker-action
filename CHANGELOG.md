@@ -1,3 +1,7 @@
+<a name="v2.0.0"></a>
+## [v2.0.0] - 2023-01-31
+<a name="v1"></a>
+## [v1] - 2020-05-21
 <a name="v1.0.0"></a>
 ## [v1.0.0] - 2020-05-21
 ### Bug Fixes
@@ -42,7 +46,9 @@
 ### Features
 - New Relic deployment marker action
 
-[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v2.0.0...HEAD
+[v2.0.0]: https://github.com/newrelic/deployment-marker-action/compare/v1...v2.0.0
+[v1]: https://github.com/newrelic/deployment-marker-action/compare/v1.0.0...v1
 [v1.0.0]: https://github.com/newrelic/deployment-marker-action/compare/v0.2.0...v1.0.0
 [v0.2.0]: https://github.com/newrelic/deployment-marker-action/compare/v0.1.2...v0.2.0
 [v0.1.2]: https://github.com/newrelic/deployment-marker-action/compare/v0.1.1...v0.1.2
