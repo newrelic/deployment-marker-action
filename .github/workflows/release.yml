@@ -1,7 +1,7 @@
 name: Release
 
 on:
-  - release
+  workflow_dispatch:
 
 jobs:
   basic_test:
@@ -18,6 +18,5 @@ jobs:
         uses: ./
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-          applicationId: ${{ secrets.NEW_RELIC_APPLICATION_ID }}
-          revision: "${{ github.repository }}:${{ env.RELEASE_VERSION }}"
+          guid: ${{ secrets.NEW_RELIC_ENTITY_GUID }}
+          version: "${{ github.repository }}:${{ env.RELEASE_VERSION }}"
