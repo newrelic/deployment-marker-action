@@ -36,7 +36,7 @@ jobs:
           accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           applicationId: ${{ secrets.APPLICATION_ID }}
-          revision: "deployment-marker-action-basic-test:${{ github.ref }}"
+          version: "deployment-marker-action-basic-test:${{ github.ref }}"
 
   all_inputs_test:
     runs-on: ubuntu-latest
@@ -51,7 +51,7 @@ jobs:
           accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           applicationId: ${{ secrets.APPLICATION_ID }}
-          revision: "deployment-marker-action-all-input-test-${{ github.sha }}"
+          version: "deployment-marker-action-all-input-test-${{ github.sha }}"
 
           # Optional
           changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"
