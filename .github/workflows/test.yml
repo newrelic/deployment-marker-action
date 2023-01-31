@@ -33,9 +33,8 @@ jobs:
       - name: Test deployment marker
         uses: ./
         with:
-          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          applicationId: ${{ secrets.APPLICATION_ID }}
+          guid: ${{ secrets.NEW_RELIC_ENTITY_GUID }}
           version: "deployment-marker-action-basic-test:${{ github.ref }}"
 
   all_inputs_test:
@@ -48,9 +47,8 @@ jobs:
       - name: Test deployment marker
         uses: ./
         with:
-          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          applicationId: ${{ secrets.APPLICATION_ID }}
+          guid: ${{ secrets.NEW_RELIC_ENTITY_GUID }}
           version: "deployment-marker-action-all-input-test-${{ github.sha }}"
 
           # Optional
