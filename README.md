@@ -79,6 +79,7 @@ jobs:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
           version: "${{ github.ref }}-${{ github.sha }}"
+          commit: "${{ github.sha }}"
 
           # Optional
           changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"

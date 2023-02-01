@@ -5,6 +5,7 @@ result=$(newrelic entity deployment create \
   --user "${NEW_RELIC_DEPLOYMENT_USER}" \
   --version "${NEW_RELIC_DEPLOYMENT_VERSION}" \
   --changelog "${NEW_RELIC_DEPLOYMENT_CHANGE_LOG}" \
+  --commit "${NEW_RELIC_DEPLOYMENT_COMMIT}" \
   --description "${NEW_RELIC_DEPLOYMENT_DESCRIPTION}" \
   --deepLink "${NEW_RELIC_DEPLOYMENT_DEEPLINK}" \
   --deploymentType "${NEW_RELIC_DEPLOYMENT_TYPE}" \

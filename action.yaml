@@ -24,6 +24,9 @@ inputs:
   changelog:
     description: 'Change log string stored with the deployment. Default: <none>'
     required: false
+  commit:
+    description: 'Commit for the deployment.'
+    required: false
   deeplink:
     description: 'Deep link referencing the deployment.'
     required: false
@@ -48,6 +51,7 @@ runs:
     NEW_RELIC_DEPLOYMENT_USER: ${{ inputs.user }}
     NEW_RELIC_DEPLOYMENT_VERSION: ${{ inputs.version }}
     NEW_RELIC_DEPLOYMENT_CHANGE_LOG: ${{ inputs.changelog }}
+    NEW_RELIC_DEPLOYMENT_COMMIT: ${{ inputs.commit}}
     NEW_RELIC_DEPLOYMENT_DESCRIPTION: ${{ inputs.description }}
     NEW_RELIC_DEPLOYMENT_DEEPLINK: ${{ inputs.deeplink }}
     NEW_RELIC_DEPLOYMENT_TYPE: ${{ inputs.deploymenttype }}
