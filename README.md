@@ -14,6 +14,7 @@ A GitHub Action to add New Relic deployment markers during your release pipeline
 | `guid`           | **yes**  | -       | The entity GUID to apply the deployment marker. |
 | `apiKey`         | **yes**  | -       | Your New Relic [personal API key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#personal-api-key). |
 | `changelog`      | no       | -       | A summary of what changed in this deployment, visible in the Deployments page. |
+| `commit`      | no       | -       | The Commit SHA for this deployment, visible in the Deployments page. |
 | `description`    | no       | -       | A high-level description of this deployment, visible in the Overview page and on the Deployments page when you select an individual deployment. |
 | `deeplink`       | no       | -       | A deep link to the source which triggered the deployment. |
 | `deploymentType` | no       | `BASIC` | The type of deployment. Choose from BASIC, BLUE_GREEN, CANARY, OTHER, ROLLING, or SHADOW. |
@@ -24,66 +25,101 @@ A GitHub Action to add New Relic deployment markers during your release pipeline
 
 ## Example usage
 
-#### Use Release Tag for Revision
+### GitHub secrets
 
-The following example could be added as a job to your existing workflow that
-creates a New Relic deployment marker with the revision being the release Tag.
-
-Github secrets assumed to be set:
+[Github secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#about-encrypted-secrets) assumed to be set:
 * `NEW_RELIC_API_KEY` - Personal API key
 * `NEW_RELIC_DEPLOYMENT_ENTITY_GUID` - New Relic Entity GUID to create the marker on
 
-```yaml
-name: Release
+>*There are a number of [default GitHub environment variables](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables) that are used in these examples as well.*
+### Minimum required fields
 
+```yaml
+name: Change Tracking Marker
 on:
   - release
+      types: [published]
 
 jobs:
   newrelic:
     runs-on: ubuntu-latest
     name: New Relic
     steps:
+      # This step builds a var with the release tag value to use later
       - name: Set Release Version from Tag
         run: echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
-
-      - name: Create New Relic deployment marker
-        uses: newrelic/deployment-marker-action@v2-beta
+      # This step creates a new Change Tracking Marker
+      - name: New Relic Application Deployment Marker
+        uses: newrelic/deployment-marker-action@v2.2.0
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
           version: "${{ env.RELEASE_VERSION }}"
+          user: "${{ github.actor }}"
 ```
 
-#### All input options
+### All input fields
 
-Add a New Relic application deployment marker on release, with all of the
-options set.
+>*In addition to `NEW_RELIC_API_KEY`, this example shows how to target multiple items by storing multiple secrets like "`NEW_RELIC_DEPLOYMENT_ENTITY_GUID_<ID>`", where `<ID>` is the unique identifier for the target item.*
 
-Github secrets assumed to be set:
-* `NEW_RELIC_API_KEY` - Personal API key
-* `NEW_RELIC_DEPLOYMENT_ENTITY_GUID` - New Relic Entity GUID to create the marker on
+```
+NEW_RELIC_DEPLOYMENT_ENTITY_GUID_App123
+NEW_RELIC_DEPLOYMENT_ENTITY_GUID_App456
+NEW_RELIC_DEPLOYMENT_ENTITY_GUID_App789
+```
 
 ```yaml
-name: Release
+name: Change Tracking Marker
 on:
-  - release
+  workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   newrelic:
     runs-on: ubuntu-latest
+    name: New Relic
     steps:
-      - name: Create New Relic deployment marker
-        uses: newrelic/deployment-marker-action@v2-beta
+      # This step builds a var with the release tag value to use later
+      - name: Set Release Version from Tag
+        run: echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+      # This step creates a new Change Tracking Marker for App123
+      - name: App123 Marker
+        uses: newrelic/deployment-marker-action@v2.2.0
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
-          version: "${{ github.ref }}-${{ github.sha }}"
+          guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID_App123 }}
+          version: "${{ env.RELEASE_VERSION }}"
+          changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
           commit: "${{ github.sha }}"
-
-          # Optional
-          changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"
-          description: "Automated Deployment via Github Actions"
-          region: ${{ secrets.NEW_RELIC_REGION }}
+          description: "Automated Release via Github Actions"
+          deploymentType: "ROLLING"
+          groupId: "Workshop App Release: ${{ github.ref_name }}"
+          user: "${{ github.actor }}"
+      # This step creates a new Change Tracking Marker for App
+      - name: App456 Marker
+        uses: newrelic/deployment-marker-action@v2.2.0
+        with:
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID_App456 }}
+          version: "${{ env.RELEASE_VERSION }}"
+          changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
+          commit: "${{ github.sha }}"
+          description: "Automated Release via Github Actions"
+          deploymentType: "ROLLING"
+          groupId: "Workshop App Release: ${{ github.ref_name }}"
+          user: "${{ github.actor }}"
+      # This step creates a new Change Tracking Marker for App789
+      - name: App789 Marker
+        uses: newrelic/deployment-marker-action@v2.2.0
+        with:
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID_App789 }}
+          version: "${{ env.RELEASE_VERSION }}"
+          changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
+          commit: "${{ github.sha }}"
+          description: "Automated Release via Github Actions"
+          deploymentType: "ROLLING"
+          groupId: "Workshop App Release: ${{ github.ref_name }}"
           user: "${{ github.actor }}"
 ```
