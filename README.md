@@ -53,6 +53,7 @@ jobs:
         uses: newrelic/deployment-marker-action@v2.2.0
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          region: "US"
           guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
           version: "${{ env.RELEASE_VERSION }}"
           user: "${{ github.actor }}"
@@ -88,6 +89,7 @@ jobs:
         uses: newrelic/deployment-marker-action@v2.2.0
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          region: "US"
           guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID_App123 }}
           version: "${{ env.RELEASE_VERSION }}"
           changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
@@ -101,6 +103,7 @@ jobs:
         uses: newrelic/deployment-marker-action@v2.2.0
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          region: "US"
           guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID_App456 }}
           version: "${{ env.RELEASE_VERSION }}"
           changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
@@ -114,6 +117,7 @@ jobs:
         uses: newrelic/deployment-marker-action@v2.2.0
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          region: "US"
           guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID_App789 }}
           version: "${{ env.RELEASE_VERSION }}"
           changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
