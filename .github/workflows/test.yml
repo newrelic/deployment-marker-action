@@ -8,47 +8,36 @@ on:
       - master
 
 jobs:
-#  should_fail_test:
-#    runs-on: ubuntu-latest
-#    name: Should Fail Test
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v2
-#
-#      - name: Test deployment marker
-#        uses: ./
-#        with:
-#          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-#          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-#          applicationId: 0
-#          revision: "deployment-marker-action-should-fail-test:${{ github.ref }}"
-
-  basic_test:
+  test_basic:
     runs-on: ubuntu-latest
-    name: Basic Usage Test
+    name: Test Basic Usage
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Test deployment marker
         uses: ./
+        env:
+          NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          guid: ${{ secrets.NEW_RELIC_ENTITY_GUID }}
+          guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
           version: "deployment-marker-action-basic-test:${{ github.ref }}"
 
-  all_inputs_test:
+  test_all_inputs:
     runs-on: ubuntu-latest
-    name: All Inputs Test
+    name: Test All Inputs
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Test deployment marker
         uses: ./
+        env:
+          NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          guid: ${{ secrets.NEW_RELIC_ENTITY_GUID }}
+          guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
           version: "deployment-marker-action-all-input-test-${{ github.sha }}"
 
           # Optional

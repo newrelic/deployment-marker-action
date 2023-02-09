@@ -18,5 +18,5 @@ jobs:
         uses: ./
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          guid: ${{ secrets.NEW_RELIC_ENTITY_GUID }}
+          guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
           version: "${{ github.repository }}:${{ env.RELEASE_VERSION }}"
