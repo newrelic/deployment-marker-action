@@ -3,7 +3,7 @@ author: 'New Relic'
 description: 'Apply a New Relic application deployment marker to an application that is monitored by New Relic.'
 branding:
   icon: 'upload-cloud'
-  color: 'blue'
+  color: 'green'
 inputs:
   apiKey:
     description: 'Your New Relic User API Key.'
@@ -56,3 +56,4 @@ runs:
     NEW_RELIC_DEPLOYMENT_DEEPLINK: ${{ inputs.deeplink }}
     NEW_RELIC_DEPLOYMENT_TYPE: ${{ inputs.deploymenttype }}
     NEW_RELIC_DEPLOYMENT_GROUP_ID: ${{ inputs.groupid }}
+    NEW_RELIC_SERVICE_NAME: "github-action|deployment-marker"
