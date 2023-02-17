@@ -6,11 +6,12 @@ on:
   push:
     branches:
       - master
+  workflow_call:
 
 jobs:
   test_basic:
     runs-on: ubuntu-latest
-    name: Test Basic Usage
+    name: Basic Usage
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -26,7 +27,7 @@ jobs:
 
   test_all_inputs:
     runs-on: ubuntu-latest
-    name: Test All Inputs
+    name: All Inputs
     steps:
       - name: Checkout
         uses: actions/checkout@v3

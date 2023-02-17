@@ -1,22 +1,59 @@
 name: Release
 
+permissions: write-all
+
 on:
   workflow_dispatch:
 
 jobs:
-  basic_test:
+  test:
+    if: github.ref == 'refs/heads/main'
+    uses: newrelic/deployment-marker-action/.github/workflows/test.yml@main
+
+  release:
+    if: github.ref == 'refs/heads/main'
+    needs: test
     runs-on: ubuntu-latest
-    name: Deployment marker example
     steps:
-      - name: Checkout
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18.x
+
+      - name: Add GOBIN to PATH
+        run: echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
+        shell: bash
+
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set Release Version from Tag
-        run: echo "RELEASE_VERSION=${{ GITHUB_REF:10 }}" >> $GITHUB_ENV
+      - name: Release
+        shell: bash
+        run: |
+          git config --global user.name ${{ secrets.NEW_RELIC_GITHUB_SERVICE_ACCOUNT_USERNAME }}
+          git config --global user.email ${{ secrets.NEW_RELIC_GITHUB_SERVICE_ACCOUNT_EMAIL }}
+          
+          chmod +x ./scripts/release-auto.sh
 
-      - name: Test deployment marker
-        uses: ./
+          ./scripts/release-auto.sh
+
+      - name: Get Release Changes
+        id: recentCommits
+        run: |
+          echo ::set-output name=latest_tag::$(git describe --abbrev=0 --tags)
+
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
-          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
-          version: "${{ github.repository }}:${{ env.RELEASE_VERSION }}"
+          ref: ${{ steps.recentCommits.outputs.latest_tag }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ steps.recentCommits.outputs.latest_tag }}
+          release_name: ${{ steps.recentCommits.outputs.latest_tag }}
+          draft: false
+          prerelease: false
