@@ -37,15 +37,15 @@ jobs:
 
           ./scripts/release-auto.sh
 
-      - name: Get Release Changes
-        id: recentCommits
+      - name: Get Latest Tag
+        id: latest_tag
         run: |
-          echo ::set-output name=latest_tag::$(git describe --abbrev=0 --tags)
+          echo ::set-output name=tag::$(git describe --abbrev=0 --tags)
 
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: ${{ steps.recentCommits.outputs.latest_tag }}
+          ref: ${{ steps.latest_tag.outputs.tag }}
 
       - name: Create Release
         id: create_release
@@ -53,7 +53,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ steps.recentCommits.outputs.latest_tag }}
-          release_name: ${{ steps.recentCommits.outputs.latest_tag }}
+          tag_name: ${{ steps.latest_tag.outputs.tag }}
+          release_name: ${{ steps.latest_tag.outputs.tag }}
           draft: false
           prerelease: false
