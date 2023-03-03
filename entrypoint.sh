@@ -12,6 +12,8 @@ result=$(newrelic entity deployment create \
   --groupId "${NEW_RELIC_DEPLOYMENT_GROUP_ID}" \
   2>&1)
 
+echo "$result"
+
 exitStatus=$?
 
 if [ $exitStatus -ne 0 ]; then
