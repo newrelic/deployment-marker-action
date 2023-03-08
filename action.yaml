@@ -41,6 +41,9 @@ inputs:
   groupid:
     description: 'Group Id used to link deployments together.'
     required: false
+outputs:
+  deploymentId:
+    description: 'The id of the deployment'
 runs:
   using: 'docker'
   image: 'Dockerfile'

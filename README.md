@@ -126,4 +126,7 @@ jobs:
           deploymentType: "ROLLING"
           groupId: "Workshop App Release: ${{ github.ref_name }}"
           user: "${{ github.actor }}"
+      # When chaining steps together, the deployment id is placeed into the github environment 
+      - name: View output
+        run: echo "${{ env.deploymentId }}"
 ```
