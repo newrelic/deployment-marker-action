@@ -1,3 +1,9 @@
+<a name="v2.3.0"></a>
+## [v2.3.0] - 2023-03-08
+### Features
+- add deployment id to output ([#37](https://github.com/newrelic/deployment-marker-action/issues/37))
+- add response to the action logs ([#35](https://github.com/newrelic/deployment-marker-action/issues/35))
+
 <a name="v2.2.0"></a>
 ## [v2.2.0] - 2023-02-13
 ### Documentation Updates
@@ -57,7 +63,8 @@
 ### Features
 - New Relic deployment marker action
 
-[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v2.3.0...HEAD
+[v2.3.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.2.0...v2.3.0
 [v2.2.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.1.0...v2.2.0
 [v2.1.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.0.0...v2.1.0
 [v2.0.0]: https://github.com/newrelic/deployment-marker-action/compare/v1...v2.0.0
