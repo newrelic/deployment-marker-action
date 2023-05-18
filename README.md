@@ -95,7 +95,7 @@ jobs:
           changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
           commit: "${{ github.sha }}"
           description: "Automated Release via Github Actions"
-          deploymentType: "ROLLING"
+          deploymenttype: "ROLLING"
           groupId: "Workshop App Release: ${{ github.ref_name }}"
           user: "${{ github.actor }}"
       # This step creates a new Change Tracking Marker for App
@@ -109,7 +109,7 @@ jobs:
           changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
           commit: "${{ github.sha }}"
           description: "Automated Release via Github Actions"
-          deploymentType: "ROLLING"
+          deploymenttype: "ROLLING"
           groupId: "Workshop App Release: ${{ github.ref_name }}"
           user: "${{ github.actor }}"
       # This step creates a new Change Tracking Marker for App789
@@ -123,7 +123,7 @@ jobs:
           changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
           commit: "${{ github.sha }}"
           description: "Automated Release via Github Actions"
-          deploymentType: "ROLLING"
+          deploymenttype: "ROLLING"
           groupId: "Workshop App Release: ${{ github.ref_name }}"
           user: "${{ github.actor }}"
       # When chaining steps together, the deployment id is placeed into the github environment 
