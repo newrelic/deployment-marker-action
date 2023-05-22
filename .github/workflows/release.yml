@@ -9,6 +9,8 @@ jobs:
   test:
     if: github.ref == 'refs/heads/main'
     uses: newrelic/deployment-marker-action/.github/workflows/test.yml@main
+    secrets: inherit
+
 
   release:
     if: github.ref == 'refs/heads/main'
