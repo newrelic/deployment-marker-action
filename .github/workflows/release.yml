@@ -11,7 +11,6 @@ jobs:
     uses: newrelic/deployment-marker-action/.github/workflows/test.yml@main
     secrets: inherit
 
-
   release:
     if: github.ref == 'refs/heads/main'
     needs: test
@@ -34,8 +33,6 @@ jobs:
         run: |
           git config --global user.name ${{ secrets.NEW_RELIC_GITHUB_SERVICE_ACCOUNT_USERNAME }}
           git config --global user.email ${{ secrets.NEW_RELIC_GITHUB_SERVICE_ACCOUNT_EMAIL }}
-          
-          chmod +x ./scripts/release-auto.sh
 
           ./scripts/release-auto.sh
 
