@@ -18,6 +18,7 @@ jobs:
       - name: Test deployment marker
         uses: ./
         env:
+          NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
@@ -33,13 +34,13 @@ jobs:
       - name: Test deployment marker
         uses: ./
         env:
+          NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
           NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
           version: "deployment-marker-action-all-input-test-${{ github.sha }}"
-
-          # Optional
+          # Optional params
           changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"
           description: "Automated Deployment via Github Actions"
           region: ${{ secrets.NEW_RELIC_REGION }}
