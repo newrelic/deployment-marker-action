@@ -1,5 +1,15 @@
+<a name="v2.5.0"></a>
+## [v2.5.0] - 2023-10-30
+### Documentation Updates
+- fix deep link parameter casing ([#49](https://github.com/newrelic/deployment-marker-action/issues/49))
+
+<a name="v2.4.0"></a>
+## [v2.4.0] - 2023-05-22
+### Bug Fixes
+- code refactor to return the right error status and doc changes
+
 <a name="v2.3.0"></a>
-## [v2.3.0] - 2023-03-08
+## [v2.3.0] - 2023-03-10
 ### Features
 - add deployment id to output ([#37](https://github.com/newrelic/deployment-marker-action/issues/37))
 - add response to the action logs ([#35](https://github.com/newrelic/deployment-marker-action/issues/35))
@@ -17,10 +27,10 @@
 
 <a name="v2.0.0"></a>
 ## [v2.0.0] - 2023-01-31
-<a name="v1"></a>
-## [v1] - 2020-05-21
 <a name="v1.0.0"></a>
 ## [v1.0.0] - 2020-05-21
+<a name="v1"></a>
+## [v1] - 2020-05-21
 ### Bug Fixes
 - **docs:** Update example changelog URL to correct path on Github
 - **vars:** Make accountId required, update flows and docs
@@ -63,13 +73,15 @@
 ### Features
 - New Relic deployment marker action
 
-[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v2.5.0...HEAD
+[v2.5.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.4.0...v2.5.0
+[v2.4.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.3.0...v2.4.0
 [v2.3.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.2.0...v2.3.0
 [v2.2.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.1.0...v2.2.0
 [v2.1.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.0.0...v2.1.0
-[v2.0.0]: https://github.com/newrelic/deployment-marker-action/compare/v1...v2.0.0
-[v1]: https://github.com/newrelic/deployment-marker-action/compare/v1.0.0...v1
-[v1.0.0]: https://github.com/newrelic/deployment-marker-action/compare/v0.2.0...v1.0.0
+[v2.0.0]: https://github.com/newrelic/deployment-marker-action/compare/v1.0.0...v2.0.0
+[v1.0.0]: https://github.com/newrelic/deployment-marker-action/compare/v1...v1.0.0
+[v1]: https://github.com/newrelic/deployment-marker-action/compare/v0.2.0...v1
 [v0.2.0]: https://github.com/newrelic/deployment-marker-action/compare/v0.1.2...v0.2.0
 [v0.1.2]: https://github.com/newrelic/deployment-marker-action/compare/v0.1.1...v0.1.2
 [v0.1.1]: https://github.com/newrelic/deployment-marker-action/compare/v0.1.0...v0.1.1
