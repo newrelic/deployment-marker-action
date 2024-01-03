@@ -16,7 +16,7 @@ A GitHub Action to add New Relic deployment markers during your release pipeline
 | `changelog`      | no       | -       | A summary of what changed in this deployment, visible in the Deployments page. |
 | `commit`         | no       | -       | The Commit SHA for this deployment, visible in the Deployments page. |
 | `description`    | no       | -       | A high-level description of this deployment, visible in the Overview page and on the Deployments page when you select an individual deployment. |
-| `deepLink`       | no       | -       | A deep link to the source which triggered the deployment. |
+| `deeplink`       | no       | -       | A deep link to the source which triggered the deployment. |
 | `deploymentType` | no       | `BASIC` | The type of deployment. Choose from BASIC, BLUE_GREEN, CANARY, OTHER, ROLLING, or SHADOW. |
 | `groupId`        | no       | -       | A group ID for the deployment to link to other deployments. |
 | `region`         | no       | `US`    | The region of your New Relic account. Default: `US` |
