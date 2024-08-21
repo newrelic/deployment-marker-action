@@ -20,6 +20,6 @@ if [ $exitStatus -ne 0 ]; then
 fi
 
 deploymentId=$(echo "$result" | grep deploymentId | cut -d '"' -f4- | cut -d '"' -f1)
-echo "deploymentId=$deploymentId" >> $GITHUB_ENV
+echo "deploymentId=$deploymentId" >> "${GITHUB_OUTPUT}"
 
 exit $exitStatus
