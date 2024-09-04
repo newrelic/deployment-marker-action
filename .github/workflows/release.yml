@@ -30,6 +30,8 @@ jobs:
 
       - name: Release
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: |
           git config --global user.name ${{ secrets.NEW_RELIC_GITHUB_SERVICE_ACCOUNT_USERNAME }}
           git config --global user.email ${{ secrets.NEW_RELIC_GITHUB_SERVICE_ACCOUNT_EMAIL }}
