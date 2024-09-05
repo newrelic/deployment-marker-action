@@ -68,6 +68,7 @@ git add CHANGELOG.md
 git commit --no-verify -m "chore(changelog): Update CHANGELOG for ${VER_NEXT}"
 git push --no-verify origin HEAD:${DEFAULT_BRANCH}
 
+# print an error message in case of failure, if the changes to the changelog cannot be committed to main
 if [ $? -ne 0 ]; then
   echo "Failed to push branch updates, exiting"
   exit 1
