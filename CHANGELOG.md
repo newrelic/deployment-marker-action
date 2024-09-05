@@ -1,3 +1,8 @@
+<a name="v2.5.1"></a>
+## [v2.5.1] - 2024-09-04
+### Bug Fixes
+- Storing deploymentId to setOuput instead of setEnv ([#70](https://github.com/newrelic/deployment-marker-action/issues/70))
+
 <a name="v2.5.0"></a>
 ## [v2.5.0] - 2023-10-30
 ### Documentation Updates
