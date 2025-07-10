@@ -45,3 +45,65 @@ jobs:
           description: "Automated Deployment via Github Actions"
           region: ${{ secrets.NEW_RELIC_REGION }}
           user: "hardcoded-test-username"
+
+  # This job tests the change tracking event with category 'FEATURE_FLAG' and uses customAttributes with JS object format.
+  test_change_tracking:
+    runs-on: ubuntu-latest
+    name: Change Tracking - Inline Attributes
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Test change event deployment marker
+        uses: ./
+        env:
+          NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+          NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
+        with:
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          command_type: "change-tracking"
+          entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
+          guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
+          version: "deployment-marker-action-basic-test:${{ github.ref }}"
+          category: 'FEATURE_FLAG'
+          type: 'basic'
+          changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
+          commit: "${{ github.sha }}"
+          deepLink: "https://example.com/deployment"
+          description: "Automated Release via Github Actions"
+          featureFlagId: "feature-flag-1"
+          user: "${{ github.actor }}"
+          groupId: "deploy-group-1"
+          shortDescription: "Pre-Prod deploy"
+          timestamp: "${{ github.event.release.published_at }}"
+          validationFlags: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
+          customAttributes: '{foo: "bar", num: 2, flag: true}'
+
+  # This job tests the change tracking event with category 'DEPLOYMENT' and uses customAttributesFile with JS object format.
+  test_change_tracking_with_custom_attributes_file:
+    runs-on: ubuntu-latest
+    name: Change Tracking - Attributes File
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Test change event deployment marker
+        uses: ./
+        env:
+          NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+          NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
+        with:
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          command_type: "change-tracking"
+          entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
+          version: "deployment-marker-action-basic-test:${{ github.ref }}"
+          category: 'DEPLOYMENT'
+          type: 'basic'
+          changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
+          commit: "${{ github.sha }}"
+          deepLink: "https://example.com/deployment"
+          description: "Automated Release via Github Actions"
+          user: "${{ github.actor }}"
+          groupId: "deploy-group-1"
+          shortDescription: "Pre-Prod deploy"
+          timestamp: "${{ github.event.release.published_at }}"
+          validationFlags: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
+          customAttributesFile: "./custom-attributes-sample.js"

@@ -1,0 +1,1 @@
+{cloud_vendor : "vendor_name", region : "us-east-1", environment : "staging"}

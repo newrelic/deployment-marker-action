@@ -41,6 +41,39 @@ inputs:
   groupid:
     description: 'Group Id used to link deployments together.'
     required: false
+
+  # --- NEW INPUTS FOR CHANGE EVENT ---
+  command_type:
+    description: 'This field lets you track any change event. To use this new API mutation, simply set it to "change-tracking".'
+    required: false
+  category:
+    description: 'The category of the change event. For a list of supported categories, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types)'
+    required: true
+  type:
+    description: 'The type of the change event. For a list of supported types, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types)'
+    required: true
+  featureFlagId:
+    description: 'The ID of the feature flag associated with the change event. This is required if the command_type is "change-tracking" and the category is "FEATURE_FLAG".'
+    required: false
+  customAttributes:
+    description: 'Represents key-value pairs of custom attributes in JavaScript object format. Attribute values can be of type string, boolean, or number. We store JavaScript number values to either Java long or double values. The main difference between JavaScript object format vs. JSON is that keys are not enclosed in quotes. For more information on limitations, [see our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-graphql/).'
+    required: false
+  customAttributesFile:
+    description: 'Path to a file containing custom attributes in JavaScript object format. This field is mutually exclusive with `customAttributes`. Either `customAttributes` or `customAttributesFile` can be provided, but not both.'
+  entitySearch:
+    description: 'Specify the entity to associate with the change tracking event via query.'
+    required: true
+  shortDescription:
+    description: 'This field allows you to add your own context to help you quickly identify the change events sent to our system. This field should contain a concise description of the change suitable for showing in various parts of New Relic One. In the marker flag, shown when hovering over the pinhead of a "Changes" marker on a chart. In the "Activity stream" panels. If this field is left blank sensible defaults will be shown instead.'
+    required: false
+  timestamp:
+    description: 'The start time of the change tracking event as the number of milliseconds since the Unix epoch. Defaults to now.'
+    required: false
+  validationFlags:
+    description: 'Validation flags for the change event (e.g., "[ALLOW_CUSTOM_CATEGORY_OR_TYPE], [FAIL_ON_FIELD_LENGTH], [FAIL_ON_REST_API_FAILURES]"). Only applicable if command_type is "change-tracking".'
+    required: false
+    default: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
+
 outputs:
   deploymentId:
     description: 'The id of the deployment'
@@ -60,3 +93,14 @@ runs:
     NEW_RELIC_DEPLOYMENT_TYPE: ${{ inputs.deploymenttype }}
     NEW_RELIC_DEPLOYMENT_GROUP_ID: ${{ inputs.groupid }}
     NEW_RELIC_SERVICE_NAME: "github-action|deployment-marker"
+
+    # --- NEW ENVIRONMENT VARIABLES FOR CHANGE EVENT ---
+    NEW_RELIC_CHANGE_EVENT_ENTITY_SEARCH: ${{ inputs.entitySearch }}
+    NEW_RELIC_CHANGE_EVENT_CATEGORY: ${{ inputs.category }}
+    NEW_RELIC_CHANGE_EVENT_TYPE: ${{ inputs.type }}
+    NEW_RELIC_CHANGE_EVENT_FEATURE_FLAG_ID: ${{ inputs.featureFlagId }}
+    NEW_RELIC_CHANGE_EVENT_VALIDATION_FLAGS: ${{ inputs.dataHandlingFlags }}
+    NEW_RELIC_CHANGE_EVENT_CUSTOM_ATTRIBUTES: ${{ inputs.customAttributes }}
+    NEW_RELIC_CHANGE_EVENT_CUSTOM_ATTRIBUTES_FILE: ${{ inputs.customAttributesFile }}
+    NEW_RELIC_CHANGE_EVENT_SHORT_DESCRIPTION: ${{ inputs.shortDescription }}
+    NEW_RELIC_CHANGE_EVENT_TIMESTAMP: ${{ inputs.timestamp }}
