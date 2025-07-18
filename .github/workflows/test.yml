@@ -47,6 +47,7 @@ jobs:
           user: "hardcoded-test-username"
 
   # This job tests the change tracking event with category 'FEATURE_FLAG' and uses customAttributes with JS object format.
+  # For more details on change tracking event mutation, please refer to our [docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#change-tracking-event-mutation)
   test_change_tracking:
     runs-on: ubuntu-latest
     name: Change Tracking - Inline Attributes

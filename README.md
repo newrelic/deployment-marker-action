@@ -16,6 +16,7 @@ This is our latest and most flexible API mutation, offering extensive customizat
 It is important to note this will create a `ChangeTrackingEvent` event instead of a `Deployment` event and is a paid feature, billed per event rather than by data volume (per GB).
 
 The `command_type` must be set to `change-tracking` to enable this functionality. Please refer below example for more details and its usage.
+For more details on change tracking event mutation, please refer to our [docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#change-tracking-event-mutation)
 
 ## Inputs
 
@@ -154,6 +155,7 @@ jobs:
 ### ChangeTracking Event Example (RECOMMENDED)
 
 The below example outlines the usage of the `changeTrackingCreateEvent` capability, will allow deployment events to be reported as rich Change Tracking events, providing more comprehensive metadata and better integration with New Relic's observability platform.
+For more details on change tracking event mutation, please refer to our [docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#change-tracking-event-mutation)
 
 ```yaml
 jobs:
