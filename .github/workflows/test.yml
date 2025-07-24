@@ -63,7 +63,6 @@ jobs:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           command_type: "change-tracking"
           entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
-          guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
           category: 'Feature Flag'
           type: 'Basic'
           description: "Automated Release via Github Actions"
