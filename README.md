@@ -6,16 +6,16 @@
 
 A GitHub Action to add New Relic deployment markers during your release pipeline.
 
-The Action supports two primary API mutations for submitting events:
+The Action supports two primary NerdGraph API mutations for submitting events:
 
 #### changeTrackingCreateDeployment (Legacy):
-This mutation is designed specifically for submitting traditional deployment events. It represents the older method for sending deployment-focused information to New Relic.
+This mutation is designed specifically for submitting traditional `Deployment` events. It represents the older method for sending deployment-focused information to New Relic.
 
 #### changeTrackingCreateEvent (RECOMMENDED):
-This is our latest and most flexible API mutation, offering extensive customization capabilities. It allows you to comprehensively track any type of change event, which includes, but is not limited to, deployments, along with custom attributes, feature flag rollouts, and various custom change events.
+This is our latest and most flexible API mutation, offering extensive customization capabilities. It allows you to comprehensively track any type of change event, which includes, but is not limited to Deployments, along with custom attributes, feature flag rollouts, customizing the marker and activity stream text via `shortDescription`, and various custom change events.
 It is important to note this will create a `ChangeTrackingEvent` event instead of a `Deployment` event and is a paid feature, billed per event rather than by data volume (per GB).
 
-The `command_type` must be set to `change-tracking` to enable this functionality. Please refer below example for more details and its usage.
+The `command_type` must be set to `change-tracking` to enable this functionality. Please refer to the example below for more details and its usage.
 For more details on change tracking event mutation, please refer to our [docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#change-tracking-event-mutation)
 
 ## Inputs
@@ -36,7 +36,7 @@ For more details on change tracking event mutation, please refer to our [docs](h
 | `command_type`         | no       | -              | This field lets you track any change event. To use this new API mutation, simply set it to "change-tracking".                                                                                                         |
 | `category`             | yes      | -              | The category of the change event. For a list of supported categories, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types).                                        |
 | `type`                 | yes      | -              | The type of the change event. For a list of supported types, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types)                                                  |
-| `featureFlagId`        | yes      | -              | The ID of the feature flag associated with the change event. This is required if the command_type is "change-tracking" and the category is "FEATURE_FLAG".                                                            |
+| `featureFlagId`        | yes      | -              | The ID of the feature flag associated with the change event. This is required if the command_type is "change-tracking" and the category is "Feature Flag".                                                            |
 | `customAttributes`     | no       | -              | Represents key-value pairs of custom attributes in JavaScript object format. Attribute values can be of type string, boolean, or number.                                                                              |
 | `customAttributesFile` | no       | -              | Path to a file containing custom attributes in JavaScript object format. This field is mutually exclusive with `customAttributes`. Either `customAttributes` or `customAttributesFile` can be provided, but not both. |
 | `entitySearch`         | yes      | -              | Specify the entity to associate with the change tracking event via query.                                                                                                                                             |
@@ -174,8 +174,8 @@ jobs:
           entitySearch: "id='entity-guid'"
           guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
           version: "${{ env.RELEASE_VERSION }}"
-          category: 'FEATURE_FLAG'
-          type: 'basic'
+          category: 'Feature Flag'
+          type: 'Basic'
           changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
           commit: "${{ github.sha }}"
           deepLink: "https://example.com/deployment"

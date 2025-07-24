@@ -53,7 +53,7 @@ inputs:
     description: 'The type of the change event. For a list of supported types, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types)'
     required: true
   featureFlagId:
-    description: 'The ID of the feature flag associated with the change event. This is required if the command_type is "change-tracking" and the category is "FEATURE_FLAG".'
+    description: 'The ID of the feature flag associated with the change event. This is required if the command_type is "change-tracking" and the category is "Feature Flag".'
     required: false
   customAttributes:
     description: 'Represents key-value pairs of custom attributes in JavaScript object format. Attribute values can be of type string, boolean, or number. We store JavaScript number values to either Java long or double values. The main difference between JavaScript object format vs. JSON is that keys are not enclosed in quotes. For more information on limitations, [see our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-graphql/).'

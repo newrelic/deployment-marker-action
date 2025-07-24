@@ -46,7 +46,7 @@ jobs:
           region: ${{ secrets.NEW_RELIC_REGION }}
           user: "hardcoded-test-username"
 
-  # This job tests the change tracking event with category 'FEATURE_FLAG' and uses customAttributes with JS object format.
+  # This job tests the change tracking event with category 'Feature Flag' and uses customAttributes with JS object format.
   # For more details on change tracking event mutation, please refer to our [docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#change-tracking-event-mutation)
   test_change_tracking:
     runs-on: ubuntu-latest
@@ -64,17 +64,13 @@ jobs:
           command_type: "change-tracking"
           entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
           guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
-          version: "deployment-marker-action-basic-test:${{ github.ref }}"
-          category: 'FEATURE_FLAG'
-          type: 'basic'
-          changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
-          commit: "${{ github.sha }}"
-          deepLink: "https://example.com/deployment"
+          category: 'Feature Flag'
+          type: 'Basic'
           description: "Automated Release via Github Actions"
           featureFlagId: "feature-flag-1"
           user: "${{ github.actor }}"
           groupId: "deploy-group-1"
-          shortDescription: "Pre-Prod deploy"
+          shortDescription: ""
           timestamp: "${{ github.event.release.published_at }}"
           validationFlags: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
           customAttributes: '{foo: "bar", num: 2, flag: true}'
@@ -96,15 +92,15 @@ jobs:
           command_type: "change-tracking"
           entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
           version: "deployment-marker-action-basic-test:${{ github.ref }}"
-          category: 'DEPLOYMENT'
-          type: 'basic'
+          category: 'Deployment'
+          type: 'Basic'
           changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
           commit: "${{ github.sha }}"
           deepLink: "https://example.com/deployment"
           description: "Automated Release via Github Actions"
           user: "${{ github.actor }}"
           groupId: "deploy-group-1"
-          shortDescription: "Pre-Prod deploy"
+          shortDescription: ""
           timestamp: "${{ github.event.release.published_at }}"
           validationFlags: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
           customAttributesFile: "./custom-attributes-sample.js"
