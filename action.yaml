@@ -42,7 +42,7 @@ inputs:
     description: 'Group Id used to link deployments together.'
     required: false
 
-  # --- NEW INPUTS FOR CHANGE EVENT ---
+  # --- NEW INPUTS FOR CREATE EVENT ---
   commandType:
     description: 'This field lets you track any change event. To use this new API mutation, simply set it to "createEvent".'
     required: false
@@ -95,13 +95,14 @@ runs:
     NEW_RELIC_DEPLOYMENT_GROUP_ID: ${{ inputs.groupid }}
     NEW_RELIC_SERVICE_NAME: "github-action|deployment-marker"
 
-    # --- NEW ENVIRONMENT VARIABLES FOR CHANGE EVENT ---
-    NEW_RELIC_CHANGE_EVENT_ENTITY_SEARCH: ${{ inputs.entitySearch }}
-    NEW_RELIC_CHANGE_EVENT_CATEGORY: ${{ inputs.category }}
-    NEW_RELIC_CHANGE_EVENT_TYPE: ${{ inputs.type }}
-    NEW_RELIC_CHANGE_EVENT_FEATURE_FLAG_ID: ${{ inputs.featureFlagId }}
-    NEW_RELIC_CHANGE_EVENT_VALIDATION_FLAGS: ${{ inputs.dataHandlingFlags }}
-    NEW_RELIC_CHANGE_EVENT_CUSTOM_ATTRIBUTES: ${{ inputs.customAttributes }}
-    NEW_RELIC_CHANGE_EVENT_CUSTOM_ATTRIBUTES_FILE: ${{ inputs.customAttributesFile }}
-    NEW_RELIC_CHANGE_EVENT_SHORT_DESCRIPTION: ${{ inputs.shortDescription }}
-    NEW_RELIC_CHANGE_EVENT_TIMESTAMP: ${{ inputs.timestamp }}
+    # --- NEW ENVIRONMENT VARIABLES FOR CREATE EVENT ---
+    NEW_RELIC_COMMAND_TYPE: ${{ inputs.commandType }}
+    NEW_RELIC_CREATE_EVENT_ENTITY_SEARCH: ${{ inputs.entitySearch }}
+    NEW_RELIC_CREATE_EVENT_CATEGORY: ${{ inputs.category }}
+    NEW_RELIC_CREATE_EVENT_TYPE: ${{ inputs.type }}
+    NEW_RELIC_CREATE_EVENT_FEATURE_FLAG_ID: ${{ inputs.featureFlagId }}
+    NEW_RELIC_CREATE_EVENT_VALIDATION_FLAGS: ${{ inputs.dataHandlingFlags }}
+    NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES: ${{ inputs.customAttributes }}
+    NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES_FILE: ${{ inputs.customAttributesFile }}
+    NEW_RELIC_CREATE_EVENT_SHORT_DESCRIPTION: ${{ inputs.shortDescription }}
+    NEW_RELIC_CREATE_EVENT_TIMESTAMP: ${{ inputs.timestamp }}

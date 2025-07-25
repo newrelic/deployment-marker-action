@@ -1,20 +1,20 @@
 #!/bin/sh
 
-if [ "${INPUT_commandType}" = "createEvent" ]; then
+if [ "${NEW_RELIC_COMMAND_TYPE}" = "createEvent" ]; then
   # Set custom attributes option and value
-  if [ -n "${NEW_RELIC_CHANGE_EVENT_CUSTOM_ATTRIBUTES}" ]; then
+  if [ -n "${NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES}" ]; then
     customAttributesOption="--customAttributes"
-    customAttributesValue="${NEW_RELIC_CHANGE_EVENT_CUSTOM_ATTRIBUTES}"
-  elif [ -n "${NEW_RELIC_CHANGE_EVENT_CUSTOM_ATTRIBUTES_FILE}" ]; then
+    customAttributesValue="${NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES}"
+  elif [ -n "${NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES_FILE}" ]; then
     customAttributesOption="--customAttributesFile"
-    customAttributesValue="${NEW_RELIC_CHANGE_EVENT_CUSTOM_ATTRIBUTES_FILE}"
+    customAttributesValue="${NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES_FILE}"
   else
     customAttributesOption=""
     customAttributesValue=""
   fi
 
     # Validation for createEvent API when category is set to Deployment
-    if [ "${NEW_RELIC_CHANGE_EVENT_CATEGORY}" = "Deployment" ]; then
+    if [ "${NEW_RELIC_CREATE_EVENT_CATEGORY}" = "Deployment" ]; then
       if [ -z "${NEW_RELIC_DEPLOYMENT_VERSION}" ]; then
         echo "::error::'version' is mandatory for createEvent API when category is set to 'Deployment'."
         exit 1
@@ -23,11 +23,11 @@ if [ "${INPUT_commandType}" = "createEvent" ]; then
 
   # Execute New Relic changeTracking command
   result=$(newrelic changeTracking create \
-    --entitySearch "${NEW_RELIC_CHANGE_EVENT_ENTITY_SEARCH}" \
-    --category "${NEW_RELIC_CHANGE_EVENT_CATEGORY}" \
-    --type "${NEW_RELIC_CHANGE_EVENT_TYPE}" \
-    --featureFlagId "${NEW_RELIC_CHANGE_EVENT_FEATURE_FLAG_ID}" \
-    --validationFlags "${NEW_RELIC_CHANGE_EVENT_VALIDATION_FLAGS}" \
+    --entitySearch "${NEW_RELIC_CREATE_EVENT_ENTITY_SEARCH}" \
+    --category "${NEW_RELIC_CREATE_EVENT_CATEGORY}" \
+    --type "${NEW_RELIC_CREATE_EVENT_TYPE}" \
+    --featureFlagId "${NEW_RELIC_CREATE_EVENT_FEATURE_FLAG_ID}" \
+    --validationFlags "${NEW_RELIC_CREATE_EVENT_VALIDATION_FLAGS}" \
     --version "${NEW_RELIC_DEPLOYMENT_VERSION}" \
     --changelog "${NEW_RELIC_DEPLOYMENT_CHANGE_LOG}" \
     --commit "${NEW_RELIC_DEPLOYMENT_COMMIT}" \
@@ -65,7 +65,9 @@ if [ $exitStatus -ne 0 ]; then
   echo "::error:: $result"
 fi
 
-deploymentId=$(echo "$result" | grep deploymentId | cut -d '"' -f4- | cut -d '"' -f1)
-echo "deploymentId=$deploymentId" >> "${GITHUB_OUTPUT}"
+if [ "${NEW_RELIC_COMMAND_TYPE}" != "createEvent" ]; then
+  deploymentId=$(echo "$result" | grep deploymentId | cut -d '"' -f4- | cut -d '"' -f1)
+  echo "deploymentId=$deploymentId" >> "${GITHUB_OUTPUT}"
+fi
 
 exit $exitStatus
