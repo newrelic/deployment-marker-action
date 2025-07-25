@@ -1,6 +1,8 @@
 name: 'New Relic Application Deployment Marker'
 author: 'New Relic'
-description: 'Apply a New Relic application deployment marker to an application that is monitored by New Relic.'
+description: 'Apply a New Relic application deployment marker to an application that is monitored by New Relic. 
+  **Important Note:** Input requirements for this action vary depending on the `commandType` chosen.
+  Please refer to the detailed documentation in the README for specific mandatory fields for each scenario.'
 branding:
   icon: 'upload-cloud'
   color: 'green'

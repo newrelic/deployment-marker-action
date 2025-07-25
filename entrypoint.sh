@@ -21,7 +21,15 @@ if [ "${NEW_RELIC_COMMAND_TYPE}" = "createEvent" ]; then
       fi
     fi
 
-  # Execute New Relic changeTracking command
+    # Validation for createEvent API when category is set to Feature Flag
+    if [ "${NEW_RELIC_CREATE_EVENT_CATEGORY}" = "Feature Flag" ]; then
+      if [ -z "${NEW_RELIC_CREATE_EVENT_FEATURE_FLAG_ID}" ]; then
+        echo "::error::'featureFlagId' is mandatory for createEvent API when category is set to 'Feature Flag'."
+        exit 1
+      fi
+    fi
+
+  # Execute New Relic changeTrackingCreateEvent command
   result=$(newrelic changeTracking create \
     --entitySearch "${NEW_RELIC_CREATE_EVENT_ENTITY_SEARCH}" \
     --category "${NEW_RELIC_CREATE_EVENT_CATEGORY}" \
