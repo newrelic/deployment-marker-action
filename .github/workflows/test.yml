@@ -61,7 +61,7 @@ jobs:
           NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          command_type: "change-tracking"
+          commandType: "createEvent"
           entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
           category: 'Feature Flag'
           type: 'Basic'
@@ -88,7 +88,7 @@ jobs:
           NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          command_type: "change-tracking"
+          commandType: "createEvent"
           entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
           version: "deployment-marker-action-basic-test:${{ github.ref }}"
           category: 'Deployment'

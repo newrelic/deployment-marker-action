@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "${INPUT_COMMAND_TYPE}" = "change-tracking" ]; then
+if [ "${INPUT_commandType}" = "createEvent" ]; then
   # Set custom attributes option and value
   if [ -n "${NEW_RELIC_CHANGE_EVENT_CUSTOM_ATTRIBUTES}" ]; then
     customAttributesOption="--customAttributes"
@@ -36,8 +36,8 @@ if [ "${INPUT_COMMAND_TYPE}" = "change-tracking" ]; then
     --user "${NEW_RELIC_DEPLOYMENT_USER}" \
     ${customAttributesOption:+${customAttributesOption} "${customAttributesValue}"} \
     2>&1)
-else
 
+else
   # Validation for createDeployment API
     if [ -z "${NEW_RELIC_DEPLOYMENT_VERSION}" ]; then
       echo "::error::'version' is mandatory for createDeployment API."
