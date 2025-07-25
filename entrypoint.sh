@@ -13,6 +13,14 @@ if [ "${INPUT_COMMAND_TYPE}" = "change-tracking" ]; then
     customAttributesValue=""
   fi
 
+    # Validation for createEvent API when category is set to Deployment
+    if [ "${NEW_RELIC_CHANGE_EVENT_CATEGORY}" = "Deployment" ]; then
+      if [ -z "${NEW_RELIC_DEPLOYMENT_VERSION}" ]; then
+        echo "::error::'version' is mandatory for createEvent API when category is set to 'Deployment'."
+        exit 1
+      fi
+    fi
+
   # Execute New Relic changeTracking command
   result=$(newrelic changeTracking create \
     --entitySearch "${NEW_RELIC_CHANGE_EVENT_ENTITY_SEARCH}" \
@@ -29,6 +37,13 @@ if [ "${INPUT_COMMAND_TYPE}" = "change-tracking" ]; then
     ${customAttributesOption:+${customAttributesOption} "${customAttributesValue}"} \
     2>&1)
 else
+
+  # Validation for createDeployment API
+    if [ -z "${NEW_RELIC_DEPLOYMENT_VERSION}" ]; then
+      echo "::error::'version' is mandatory for createDeployment API."
+      exit 1
+    fi
+
   # Execute New Relic entity deployment command
   result=$(newrelic entity deployment create \
     --guid "${NEW_RELIC_DEPLOYMENT_ENTITY_GUID}" \

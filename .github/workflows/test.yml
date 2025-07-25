@@ -46,9 +46,9 @@ jobs:
           region: ${{ secrets.NEW_RELIC_REGION }}
           user: "hardcoded-test-username"
 
-  # This job tests the change tracking event with category 'Feature Flag' and uses customAttributes with JS object format.
+  # This job tests the change tracking create event with category 'Feature Flag' and uses customAttributes with JS object format.
   # For more details on change tracking event mutation, please refer to our [docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#change-tracking-event-mutation)
-  test_change_tracking:
+  test_create_event:
     runs-on: ubuntu-latest
     name: Change Tracking - Inline Attributes
     steps:
@@ -74,8 +74,8 @@ jobs:
           validationFlags: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
           customAttributes: '{foo: "bar", num: 2, flag: true}'
 
-  # This job tests the change tracking event with category 'DEPLOYMENT' and uses customAttributesFile with JS object format.
-  test_change_tracking_with_custom_attributes_file:
+  # This job tests the change tracking create event with category 'DEPLOYMENT' and uses customAttributesFile with JS object format.
+  test_create_event_with_custom_attributes_file:
     runs-on: ubuntu-latest
     name: Change Tracking - Attributes File
     steps:

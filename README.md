@@ -15,10 +15,10 @@ This mutation is designed specifically for submitting traditional `Deployment` e
 This is our latest and most flexible API mutation, offering extensive customization capabilities. It allows you to comprehensively track any type of change event, which includes, but is not limited to Deployments, along with custom attributes, feature flag rollouts, customizing the marker and activity stream text via `shortDescription`, and various custom change events.
 It is important to note this will create a `ChangeTrackingEvent` event instead of a `Deployment` event and is a paid feature, billed per event rather than by data volume (per GB).
 
-The `command_type` must be set to `change-tracking` to enable this functionality. Please refer to the example below for more details and its usage.
+The `commandType` must be set to `createEvent` to enable this functionality. Please refer to the example below for more details and its usage.
 For more details on change tracking event mutation, please refer to our [docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#change-tracking-event-mutation)
 
-## Inputs
+## changeTrackingCreateDeployment Inputs
 
 | Key                    | Required | Default        | Description                                                                                                                                                                                                           |
 |------------------------|----------|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -33,16 +33,32 @@ For more details on change tracking event mutation, please refer to our [docs](h
 | `region`               | no       | `US`           | The region of your New Relic account. Default: `US`                                                                                                                                                                   |
 | `version`              | yes      | -              | Metadata to apply to the deployment marker - e.g. the latest release tag                                                                                                                                              |
 | `user`                 | yes      | `github.actor` | A username to associate with the deployment, visible in the Overview page and on the Deployments page.                                                                                                                |
-| `command_type`         | no       | -              | This field lets you track any change event. To use this new API mutation, simply set it to "change-tracking".                                                                                                         |
+
+## changeTrackingCreateEvent Inputs
+
+| Key                    | Required | Default        | Description                                                                                                                                                                                                           |
+|------------------------|----------|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `apiKey`               | yes      | -              | Your New Relic [personal API key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#personal-api-key).                                                                              |
+| `changelog`            | no       | -              | A summary of what changed in this deployment, visible in the Deployments page.                                                                                                                                        |
+| `commit`               | no       | -              | The Commit SHA for this deployment, visible in the Deployments page.                                                                                                                                                  |
+| `description`          | no       | -              | A high-level description of this deployment, visible in the Overview page and on the Deployments page when you select an individual deployment.                                                                       |
+| `deeplink`             | no       | -              | A deep link to the source which triggered the deployment.                                                                                                                                                             |
+| `deploymenttype`       | no       | `BASIC`        | The type of deployment. Choose from BASIC, BLUE_GREEN, CANARY, OTHER, ROLLING, or SHADOW.                                                                                                                             |
+| `groupid`              | no       | -              | A group ID for the deployment to link to other deployments.                                                                                                                                                           |
+| `region`               | no       | `US`           | The region of your New Relic account. Default: `US`                                                                                                                                                                   |
+| `version`              | yes      | -              | Metadata to apply to the deployment marker - e.g. the latest release tag                                                                                                                                              |
+| `user`                 | yes      | `github.actor` | A username to associate with the deployment, visible in the Overview page and on the Deployments page.                                                                                                                |
+| `commandType`          | no       | -              | This field lets you track any change event. To use this new API mutation, simply set it to "createEvent".                                                                                                             |
 | `category`             | yes      | -              | The category of the change event. For a list of supported categories, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types).                                        |
 | `type`                 | yes      | -              | The type of the change event. For a list of supported types, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types)                                                  |
-| `featureFlagId`        | yes      | -              | The ID of the feature flag associated with the change event. This is required if the command_type is "change-tracking" and the category is "Feature Flag".                                                            |
+| `featureFlagId`        | yes      | -              | The ID of the feature flag associated with the change event. This is required if the commandType is "createEvent" and the category is "Feature Flag".                                                                 |
 | `customAttributes`     | no       | -              | Represents key-value pairs of custom attributes in JavaScript object format. Attribute values can be of type string, boolean, or number.                                                                              |
 | `customAttributesFile` | no       | -              | Path to a file containing custom attributes in JavaScript object format. This field is mutually exclusive with `customAttributes`. Either `customAttributes` or `customAttributesFile` can be provided, but not both. |
 | `entitySearch`         | yes      | -              | Specify the entity to associate with the change tracking event via query.                                                                                                                                             |
 | `shortDescription`     | no       | -              | This field allows you to add your own context to help you quickly identify the change events sent to our system.                                                                                                      |
 | `timestamp`            | no       | -              | The start time of the change tracking event as the number of milliseconds since the Unix epoch. Defaults to now.                                                                                                      |
-| `validationFlags`      | no       | -              | Validation flags for the change event (e.g., "`[ALLOW_CUSTOM_CATEGORY_OR_TYPE]`, `[FAIL_ON_FIELD_LENGTH]`, `[FAIL_ON_REST_API_FAILURES]`"). Only applicable if command_type is "change-tracking".                     |
+| `validationFlags`      | no       | -              | Validation flags for the change event (e.g., "`[ALLOW_CUSTOM_CATEGORY_OR_TYPE]`, `[FAIL_ON_FIELD_LENGTH]`, `[FAIL_ON_REST_API_FAILURES]`"). Only applicable if commandType is "createEvent".                          |
+
 
 ## Example usage
 
@@ -152,7 +168,7 @@ jobs:
         run: echo "${{ env.deploymentId }}"
 ```
 
-### ChangeTracking Event Example (RECOMMENDED)
+### changeTrackingCreateEvent (RECOMMENDED)
 
 The below example outlines the usage of the `changeTrackingCreateEvent` capability, will allow deployment events to be reported as rich Change Tracking events, providing more comprehensive metadata and better integration with New Relic's observability platform.
 For more details on change tracking event mutation, please refer to our [docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#change-tracking-event-mutation)
@@ -170,7 +186,7 @@ jobs:
         uses: newrelic/deployment-marker-action@v2.2.0
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          command_type: "change-tracking"
+          commandType: "createEvent"
           entitySearch: "id='entity-guid'"
           guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
           version: "${{ env.RELEASE_VERSION }}"
@@ -183,8 +199,7 @@ jobs:
           featureFlagId: "feature-flag-1"
           user: "${{ github.actor }}"
           groupId: "deploy-group-1"
-          shortDescription: "Pre-Prod deploy"
+          shortDescription: ""
           timestamp: "${{ github.event.release.published_at }}"
-          validationFlags: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
           customAttributes: '{cloud_vendor : "vendor_name", region : "us-east-1", environment : "staging"}'
 ```

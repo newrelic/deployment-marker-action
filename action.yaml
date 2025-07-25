@@ -13,7 +13,7 @@ inputs:
     required: true
   version:
     description: 'Custom version information to add to the deployment marker - e.g. the latest tag.'
-    required: true
+    required: false
   region:
     description: 'The geographical region for your New Relic account - US or EU. Default: US'
     required: false
@@ -43,9 +43,10 @@ inputs:
     required: false
 
   # --- NEW INPUTS FOR CHANGE EVENT ---
-  command_type:
-    description: 'This field lets you track any change event. To use this new API mutation, simply set it to "change-tracking".'
+  commandType:
+    description: 'This field lets you track any change event. To use this new API mutation, simply set it to "createEvent".'
     required: false
+    default: createDeployment
   category:
     description: 'The category of the change event. For a list of supported categories, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types)'
     required: true
@@ -53,7 +54,7 @@ inputs:
     description: 'The type of the change event. For a list of supported types, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types)'
     required: true
   featureFlagId:
-    description: 'The ID of the feature flag associated with the change event. This is required if the command_type is "change-tracking" and the category is "Feature Flag".'
+    description: 'The ID of the feature flag associated with the change event. This is required if the commandType is "createEvent" and the category is "Feature Flag".'
     required: false
   customAttributes:
     description: 'Represents key-value pairs of custom attributes in JavaScript object format. Attribute values can be of type string, boolean, or number. We store JavaScript number values to either Java long or double values. The main difference between JavaScript object format vs. JSON is that keys are not enclosed in quotes. For more information on limitations, [see our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-graphql/).'
@@ -70,7 +71,7 @@ inputs:
     description: 'The start time of the change tracking event as the number of milliseconds since the Unix epoch. Defaults to now.'
     required: false
   validationFlags:
-    description: 'Validation flags for the change event (e.g., "[ALLOW_CUSTOM_CATEGORY_OR_TYPE], [FAIL_ON_FIELD_LENGTH], [FAIL_ON_REST_API_FAILURES]"). Only applicable if command_type is "change-tracking".'
+    description: 'Validation flags for the change event (e.g., "[ALLOW_CUSTOM_CATEGORY_OR_TYPE], [FAIL_ON_FIELD_LENGTH], [FAIL_ON_REST_API_FAILURES]"). Only applicable if commandType is "createEvent".'
     required: false
     default: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
 
