@@ -71,7 +71,6 @@ jobs:
           groupId: "deploy-group-1"
           shortDescription: ""
           timestamp: "${{ github.event.release.published_at }}"
-          validationFlags: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
           customAttributes: '{foo: "bar", num: 2, flag: true}'
 
   # This job tests the change tracking create event with category 'DEPLOYMENT' and uses customAttributesFile with JS object format.

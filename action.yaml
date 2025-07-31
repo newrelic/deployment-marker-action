@@ -75,7 +75,6 @@ inputs:
   validationFlags:
     description: 'Validation flags for the change event (e.g., "[ALLOW_CUSTOM_CATEGORY_OR_TYPE], [FAIL_ON_FIELD_LENGTH], [FAIL_ON_REST_API_FAILURES]"). Only applicable if commandType is "createEvent".'
     required: false
-    default: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
 
 outputs:
   deploymentId:
