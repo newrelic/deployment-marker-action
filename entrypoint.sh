@@ -1,17 +1,6 @@
 #!/bin/sh
 
 if [ "${NEW_RELIC_COMMAND_TYPE}" = "createEvent" ]; then
-  # Set custom attributes option and value
-  if [ -n "${NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES}" ]; then
-    customAttributesOption="--customAttributes"
-    customAttributesValue="${NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES}"
-  elif [ -n "${NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES_FILE}" ]; then
-    customAttributesOption="--customAttributesFile"
-    customAttributesValue="${NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES_FILE}"
-  else
-    customAttributesOption=""
-    customAttributesValue=""
-  fi
 
     # Validation for createEvent API when category is set to Deployment
     if [ "${NEW_RELIC_CREATE_EVENT_CATEGORY}" = "Deployment" ]; then
@@ -42,7 +31,7 @@ if [ "${NEW_RELIC_COMMAND_TYPE}" = "createEvent" ]; then
     --deepLink "${NEW_RELIC_DEPLOYMENT_DEEPLINK}" \
     --description "${NEW_RELIC_DEPLOYMENT_DESCRIPTION}" \
     --user "${NEW_RELIC_DEPLOYMENT_USER}" \
-    ${customAttributesOption:+${customAttributesOption} "${customAttributesValue}"} \
+    --customAttributes "${NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES}" \
     2>&1)
 
 else

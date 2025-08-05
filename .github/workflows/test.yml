@@ -73,7 +73,7 @@ jobs:
           timestamp: "${{ github.event.release.published_at }}"
           customAttributes: '{foo: "bar", num: 2, flag: true}'
 
-  # This job tests the change tracking create event with category 'DEPLOYMENT' and uses customAttributesFile with JS object format.
+  # This job tests the change tracking create event with category 'DEPLOYMENT' and uses customAttributes file with JS object format.
   test_create_event_with_custom_attributes_file:
     runs-on: ubuntu-latest
     name: Change Tracking - Attributes File
@@ -101,4 +101,4 @@ jobs:
           shortDescription: ""
           timestamp: "${{ github.event.release.published_at }}"
           validationFlags: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
-          customAttributesFile: "./custom-attributes-sample.js"
+          customAttributes: "./custom-attributes-sample.js"

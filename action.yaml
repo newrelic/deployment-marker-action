@@ -61,8 +61,6 @@ inputs:
   customAttributes:
     description: 'Represents key-value pairs of custom attributes in JavaScript object format. Attribute values can be of type string, boolean, or number. We store JavaScript number values to either Java long or double values. The main difference between JavaScript object format vs. JSON is that keys are not enclosed in quotes. For more information on limitations, [see our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-graphql/).'
     required: false
-  customAttributesFile:
-    description: 'Path to a file containing custom attributes in JavaScript object format. This field is mutually exclusive with `customAttributes`. Either `customAttributes` or `customAttributesFile` can be provided, but not both.'
   entitySearch:
     description: 'Specify the entity to associate with the change tracking event via query.'
     required: true
@@ -104,6 +102,5 @@ runs:
     NEW_RELIC_CREATE_EVENT_FEATURE_FLAG_ID: ${{ inputs.featureFlagId }}
     NEW_RELIC_CREATE_EVENT_VALIDATION_FLAGS: ${{ inputs.dataHandlingFlags }}
     NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES: ${{ inputs.customAttributes }}
-    NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES_FILE: ${{ inputs.customAttributesFile }}
     NEW_RELIC_CREATE_EVENT_SHORT_DESCRIPTION: ${{ inputs.shortDescription }}
     NEW_RELIC_CREATE_EVENT_TIMESTAMP: ${{ inputs.timestamp }}
