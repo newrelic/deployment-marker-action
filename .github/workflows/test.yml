@@ -48,12 +48,15 @@ jobs:
 
   # This job tests the change tracking create event with category 'Feature Flag' and uses customAttributes with JS object format.
   # For more details on change tracking event mutation, please refer to our [docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#change-tracking-event-mutation)
-  test_create_event:
+  test_change_tracking:
     runs-on: ubuntu-latest
     name: Change Tracking - Inline Attributes
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Get current timestamp in milliseconds
+        id: timestamp
+        run: echo "NOW_MS=$(date +%s%3N)" >> $GITHUB_OUTPUT
       - name: Test change event deployment marker
         uses: ./
         env:
@@ -61,25 +64,28 @@ jobs:
           NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          commandType: "createEvent"
+          commandType: "changeTrackingCreateEvent"
           entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
           category: 'Feature Flag'
           type: 'Basic'
           description: "Automated Release via Github Actions"
           featureFlagId: "feature-flag-1"
           user: "${{ github.actor }}"
-          groupId: "deploy-group-1"
+          groupid: "deploy-group-1"
           shortDescription: ""
-          timestamp: "${{ github.event.release.published_at }}"
+          timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"
           customAttributes: '{foo: "bar", num: 2, flag: true}'
 
   # This job tests the change tracking create event with category 'DEPLOYMENT' and uses customAttributes file with JS object format.
-  test_create_event_with_custom_attributes_file:
+  test_change_tracking_with_custom_attributes_file:
     runs-on: ubuntu-latest
     name: Change Tracking - Attributes File
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Get current timestamp in milliseconds
+        id: timestamp
+        run: echo "NOW_MS=$(date +%s%3N)" >> $GITHUB_OUTPUT
       - name: Test change event deployment marker
         uses: ./
         env:
@@ -87,18 +93,49 @@ jobs:
           NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          commandType: "createEvent"
+          commandType: "changeTrackingCreateEvent"
           entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
           version: "deployment-marker-action-basic-test:${{ github.ref }}"
           category: 'Deployment'
           type: 'Basic'
           changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
           commit: "${{ github.sha }}"
-          deepLink: "https://example.com/deployment"
+          deeplink: "https://example.com/deployment"
           description: "Automated Release via Github Actions"
           user: "${{ github.actor }}"
-          groupId: "deploy-group-1"
+          groupid: "deploy-group-1"
           shortDescription: ""
-          timestamp: "${{ github.event.release.published_at }}"
-          validationFlags: '[ALLOW_CUSTOM_CATEGORY_OR_TYPE]'
+          timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"
+          customAttributes: "./custom-attributes-sample.js"
+
+  # This job tests the change tracking create event using an alternative entity search combination instead of an entity GUID.
+  test_change_tracking_non_guid_entity_lookup:
+    runs-on: ubuntu-latest
+    name: Change Tracking - Non GUID Entity Lookup
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Get current timestamp in milliseconds
+        id: timestamp
+        run: echo "NOW_MS=$(date +%s%3N)" >> $GITHUB_OUTPUT
+      - name: Test change event deployment marker
+        uses: ./
+        env:
+          NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+          NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
+        with:
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          commandType: "changeTrackingCreateEvent"
+          entitySearch: "name = 'Dummy App Pro Max' and domain = 'APM' and type = 'APPLICATION'"
+          version: "deployment-marker-action-basic-test:${{ github.ref }}"
+          category: 'Deployment'
+          type: 'Basic'
+          changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
+          commit: "${{ github.sha }}"
+          deeplink: "https://example.com/deployment"
+          description: "Automated Release via Github Actions"
+          user: "${{ github.actor }}"
+          groupid: "deploy-group-1"
+          shortDescription: ""
+          timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"
           customAttributes: "./custom-attributes-sample.js"

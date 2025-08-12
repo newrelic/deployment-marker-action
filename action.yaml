@@ -1,6 +1,6 @@
 name: 'New Relic Application Deployment Marker'
 author: 'New Relic'
-description: 'Apply a New Relic application deployment marker to an application that is monitored by New Relic. 
+description: 'Apply a New Relic application change event marker to an application that is monitored by New Relic. 
   **Important Note:** Input requirements for this action vary depending on the `commandType` chosen.
   Please refer to the detailed documentation in the README for specific mandatory fields for each scenario.'
 branding:
@@ -44,11 +44,11 @@ inputs:
     description: 'Group Id used to link deployments together.'
     required: false
 
-  # --- NEW INPUTS FOR CREATE EVENT ---
+  # --- NEW INPUTS FOR changeTrackingCreateEvent ---
   commandType:
-    description: 'This field lets you track any change event. To use this new API mutation, simply set it to "createEvent".'
+    description: 'This field lets you track any change event. To use this new API mutation, you must set it to "changeTrackingCreateEvent".'
     required: false
-    default: createDeployment
+    default: changeTrackingCreateDeployment
   category:
     description: 'The category of the change event. For a list of supported categories, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types)'
     required: true
@@ -56,7 +56,7 @@ inputs:
     description: 'The type of the change event. For a list of supported types, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types)'
     required: true
   featureFlagId:
-    description: 'The ID of the feature flag associated with the change event. This is required if the commandType is "createEvent" and the category is "Feature Flag".'
+    description: 'The ID of the feature flag associated with the change event. This is required if the commandType is "changeTrackingCreateEvent" and the category is "Feature Flag".'
     required: false
   customAttributes:
     description: 'Represents key-value pairs of custom attributes in JavaScript object format. Attribute values can be of type string, boolean, or number. We store JavaScript number values to either Java long or double values. The main difference between JavaScript object format vs. JSON is that keys are not enclosed in quotes. For more information on limitations, [see our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-graphql/).'
@@ -71,7 +71,7 @@ inputs:
     description: 'The start time of the change tracking event as the number of milliseconds since the Unix epoch. Defaults to now.'
     required: false
   validationFlags:
-    description: 'Validation flags for the change event (e.g., "[ALLOW_CUSTOM_CATEGORY_OR_TYPE], [FAIL_ON_FIELD_LENGTH], [FAIL_ON_REST_API_FAILURES]"). Only applicable if commandType is "createEvent".'
+    description: 'Validation flags for the change event (e.g., "[ALLOW_CUSTOM_CATEGORY_OR_TYPE], [FAIL_ON_FIELD_LENGTH], [FAIL_ON_REST_API_FAILURES]"). Only applicable if commandType is "changeTrackingCreateEvent".'
     required: false
 
 outputs:
@@ -94,7 +94,7 @@ runs:
     NEW_RELIC_DEPLOYMENT_GROUP_ID: ${{ inputs.groupid }}
     NEW_RELIC_SERVICE_NAME: "github-action|deployment-marker"
 
-    # --- NEW ENVIRONMENT VARIABLES FOR CREATE EVENT ---
+    # --- NEW ENVIRONMENT VARIABLES FOR changeTrackingCreateEvent ---
     NEW_RELIC_COMMAND_TYPE: ${{ inputs.commandType }}
     NEW_RELIC_CREATE_EVENT_ENTITY_SEARCH: ${{ inputs.entitySearch }}
     NEW_RELIC_CREATE_EVENT_CATEGORY: ${{ inputs.category }}

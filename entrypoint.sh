@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "${NEW_RELIC_COMMAND_TYPE}" = "createEvent" ]; then
+if [ "${NEW_RELIC_COMMAND_TYPE}" = "changeTrackingCreateEvent" ]; then
 
     # Validation for createEvent API when category is set to Deployment
     if [ "${NEW_RELIC_CREATE_EVENT_CATEGORY}" = "Deployment" ]; then
@@ -62,7 +62,7 @@ if [ $exitStatus -ne 0 ]; then
   echo "::error:: $result"
 fi
 
-if [ "${NEW_RELIC_COMMAND_TYPE}" != "createEvent" ]; then
+if [ "${NEW_RELIC_COMMAND_TYPE}" != "changeTrackingCreateEvent" ]; then
   deploymentId=$(echo "$result" | grep deploymentId | cut -d '"' -f4- | cut -d '"' -f1)
   echo "deploymentId=$deploymentId" >> "${GITHUB_OUTPUT}"
 fi

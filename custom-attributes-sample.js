@@ -1,1 +1,1 @@
-{cloud_vendor : "vendor_name", region : "us-east-1", environment : "staging"}
+{cloud_vendor: "vendor_name", region: "us-east-1", isProd: true, instances: 2}
