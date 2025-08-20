@@ -24,6 +24,7 @@ jobs:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
           version: "deployment-marker-action-basic-test:${{ github.ref }}"
+          region: ${{ secrets.NEW_RELIC_REGION }}
 
   test_all_inputs:
     runs-on: ubuntu-latest
@@ -59,9 +60,6 @@ jobs:
         run: echo "NOW_MS=$(date +%s%3N)" >> $GITHUB_OUTPUT
       - name: Test change event deployment marker
         uses: ./
-        env:
-          NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-          NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           commandType: "changeTrackingCreateEvent"
@@ -75,6 +73,7 @@ jobs:
           shortDescription: ""
           timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"
           customAttributes: '{foo: "bar", num: 2, flag: true}'
+          region: ${{ secrets.NEW_RELIC_REGION }}
 
   # This job tests the change tracking create event with category 'DEPLOYMENT' and uses customAttributes file with JS object format.
   test_change_tracking_with_custom_attributes_file:
@@ -88,9 +87,6 @@ jobs:
         run: echo "NOW_MS=$(date +%s%3N)" >> $GITHUB_OUTPUT
       - name: Test change event deployment marker
         uses: ./
-        env:
-          NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-          NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           commandType: "changeTrackingCreateEvent"
@@ -107,6 +103,7 @@ jobs:
           shortDescription: ""
           timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"
           customAttributes: "./custom-attributes-sample.js"
+          region: ${{ secrets.NEW_RELIC_REGION }}
 
   # This job tests the change tracking create event using an alternative entity search combination instead of an entity GUID.
   test_change_tracking_non_guid_entity_lookup:
@@ -120,9 +117,6 @@ jobs:
         run: echo "NOW_MS=$(date +%s%3N)" >> $GITHUB_OUTPUT
       - name: Test change event deployment marker
         uses: ./
-        env:
-          NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-          NEW_RELIC_SERVICE_NAME: github-action-integration-test|deployment-marker
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           commandType: "changeTrackingCreateEvent"
@@ -139,3 +133,4 @@ jobs:
           shortDescription: ""
           timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"
           customAttributes: "./custom-attributes-sample.js"
+          region: ${{ secrets.NEW_RELIC_REGION }}
