@@ -20,18 +20,21 @@ if [ "${NEW_RELIC_COMMAND_TYPE}" = "changeTrackingCreateEvent" ]; then
 
   # Execute New Relic changeTrackingCreateEvent command
   result=$(newrelic changeTracking create \
-    --entitySearch "${NEW_RELIC_CREATE_EVENT_ENTITY_SEARCH}" \
     --category "${NEW_RELIC_CREATE_EVENT_CATEGORY}" \
-    --type "${NEW_RELIC_CREATE_EVENT_TYPE}" \
-    --featureFlagId "${NEW_RELIC_CREATE_EVENT_FEATURE_FLAG_ID}" \
-    --validationFlags "${NEW_RELIC_CREATE_EVENT_VALIDATION_FLAGS}" \
-    --version "${NEW_RELIC_DEPLOYMENT_VERSION}" \
     --changelog "${NEW_RELIC_DEPLOYMENT_CHANGE_LOG}" \
     --commit "${NEW_RELIC_DEPLOYMENT_COMMIT}" \
+    --customAttributes "${NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES}" \
     --deepLink "${NEW_RELIC_DEPLOYMENT_DEEPLINK}" \
     --description "${NEW_RELIC_DEPLOYMENT_DESCRIPTION}" \
+    --entitySearch "${NEW_RELIC_CREATE_EVENT_ENTITY_SEARCH}" \
+    --featureFlagId "${NEW_RELIC_CREATE_EVENT_FEATURE_FLAG_ID}" \
+    --groupId "${NEW_RELIC_DEPLOYMENT_GROUP_ID}" \
+    --shortDescription "${NEW_RELIC_CREATE_EVENT_SHORT_DESCRIPTION}" \
+    --timestamp "${NEW_RELIC_CREATE_EVENT_TIMESTAMP}" \
+    --type "${NEW_RELIC_CREATE_EVENT_TYPE}" \
     --user "${NEW_RELIC_DEPLOYMENT_USER}" \
-    --customAttributes "${NEW_RELIC_CREATE_EVENT_CUSTOM_ATTRIBUTES}" \
+    --validationFlags "${NEW_RELIC_CREATE_EVENT_VALIDATION_FLAGS}" \
+    --version "${NEW_RELIC_DEPLOYMENT_VERSION}" \
     2>&1)
 
 else
@@ -43,15 +46,15 @@ else
 
   # Execute New Relic entity deployment command
   result=$(newrelic entity deployment create \
-    --guid "${NEW_RELIC_DEPLOYMENT_ENTITY_GUID}" \
-    --user "${NEW_RELIC_DEPLOYMENT_USER}" \
-    --version "${NEW_RELIC_DEPLOYMENT_VERSION}" \
     --changelog "${NEW_RELIC_DEPLOYMENT_CHANGE_LOG}" \
     --commit "${NEW_RELIC_DEPLOYMENT_COMMIT}" \
-    --description "${NEW_RELIC_DEPLOYMENT_DESCRIPTION}" \
     --deepLink "${NEW_RELIC_DEPLOYMENT_DEEPLINK}" \
     --deploymentType "${NEW_RELIC_DEPLOYMENT_TYPE}" \
+    --description "${NEW_RELIC_DEPLOYMENT_DESCRIPTION}" \
+    --guid "${NEW_RELIC_DEPLOYMENT_ENTITY_GUID}" \
     --groupId "${NEW_RELIC_DEPLOYMENT_GROUP_ID}" \
+    --user "${NEW_RELIC_DEPLOYMENT_USER}" \
+    --version "${NEW_RELIC_DEPLOYMENT_VERSION}" \
     2>&1)
 fi
 
