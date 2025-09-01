@@ -116,6 +116,8 @@ jobs:
         run: echo "NOW_MS=$(date +%s%3N)" >> $GITHUB_OUTPUT
       - name: Test change event deployment marker
         uses: ./
+        env:
+          ENTITY_NAME: ${{ secrets.NEW_RELIC_ENTITY_NAME }}
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           category: 'Deployment'
@@ -125,7 +127,7 @@ jobs:
           customAttributes: "./custom-attributes-sample.js"
           deeplink: "https://example.com/deployment"
           description: "Automated Release via Github Actions"
-          entitySearch: "name = 'Dummy App Pro Max' and domain = 'APM' and type = 'APPLICATION'"
+          entitySearch: "name = '${{ env.ENTITY_NAME }}' and domain = 'APM' and type = 'APPLICATION'"
           groupid: "deploy-group-1"
           region: ${{ secrets.NEW_RELIC_REGION }}
           shortDescription: "A Short description of the change event"

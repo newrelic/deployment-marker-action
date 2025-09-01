@@ -51,10 +51,10 @@ inputs:
     default: changeTrackingCreateDeployment
   category:
     description: 'The category of the change event. For a list of supported categories, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types)'
-    required: true
+    required: false
   type:
     description: 'The type of the change event. For a list of supported types, [view our docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#supported-types)'
-    required: true
+    required: false
   featureFlagId:
     description: 'The ID of the feature flag associated with the change event. This is required if the commandType is "changeTrackingCreateEvent" and the category is "Feature Flag".'
     required: false
@@ -63,7 +63,7 @@ inputs:
     required: false
   entitySearch:
     description: 'Specify the entity to associate with the change tracking event via query.'
-    required: true
+    required: false
   shortDescription:
     description: 'This field allows you to add your own context to help you quickly identify the change events sent to our system. This field should contain a concise description of the change suitable for showing in various parts of New Relic One. In the marker flag, shown when hovering over the pinhead of a "Changes" marker on a chart. In the "Activity stream" panels. If this field is left blank sensible defaults will be shown instead.'
     required: false
@@ -92,7 +92,6 @@ runs:
     NEW_RELIC_DEPLOYMENT_DEEPLINK: ${{ inputs.deeplink }}
     NEW_RELIC_DEPLOYMENT_TYPE: ${{ inputs.deploymenttype }}
     NEW_RELIC_DEPLOYMENT_GROUP_ID: ${{ inputs.groupid }}
-    NEW_RELIC_SERVICE_NAME: "github-action|deployment-marker"
 
     # --- NEW ENVIRONMENT VARIABLES FOR changeTrackingCreateEvent ---
     NEW_RELIC_COMMAND_TYPE: ${{ inputs.commandType }}
