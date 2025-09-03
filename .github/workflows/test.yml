@@ -114,10 +114,22 @@ jobs:
       - name: Get current timestamp in milliseconds
         id: timestamp
         run: echo "NOW_MS=$(date +%s%3N)" >> $GITHUB_OUTPUT
+      - name: Load .env file
+        uses: aarcangeli/load-dotenv@v1 # This action loads the .env file
+        with:
+          filename: .env
+        continue-on-error: true
+      - name: Set entity name
+        id: set_entity_name
+        run: |
+          # Check if ENTITY_NAME is in the environment (from .env)
+          if [ -n "${{ env.NEW_RELIC_ENTITY_NAME }}" ]; then
+            echo "ENTITY_NAME=${{ env.NEW_RELIC_ENTITY_NAME }}" >> $GITHUB_ENV
+          else
+            echo "ENTITY_NAME=${{ secrets.NEW_RELIC_ENTITY_NAME }}" >> $GITHUB_ENV
+          fi
       - name: Test change event deployment marker
         uses: ./
-        env:
-          ENTITY_NAME: ${{ secrets.NEW_RELIC_ENTITY_NAME }}
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           category: 'Deployment'
