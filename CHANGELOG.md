@@ -1,12 +1,12 @@
 <a name="v2.6.0"></a>
 ## [v2.6.0] - 2025-09-03
-### Documentation Updates
-- Update README docs to the latest version of the action.
+### Features
+- Add changeTrackingCreateEvent support to track any change events.
 
 <a name="v2.5.2"></a>
 ## [v2.5.2] - 2025-09-03
-### Features
-- Add changeTrackingCreateEvent support to track any change events.
+### Documentation Updates
+- Update README docs to the latest version of the action.
 
 <a name="v2.5.1"></a>
 ## [v2.5.1] - 2024-09-04
@@ -88,7 +88,10 @@
 ### Features
 - New Relic deployment marker action
 
-[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v2.5.0...HEAD
+[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v2.6.0...HEAD
+[v2.6.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.5.2...v2.6.0
+[v2.5.2]: https://github.com/newrelic/deployment-marker-action/compare/v2.5.1...v2.5.2
+[v2.5.1]: https://github.com/newrelic/deployment-marker-action/compare/v2.5.0...v2.5.1
 [v2.5.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.4.0...v2.5.0
 [v2.4.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.3.0...v2.4.0
 [v2.3.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.2.0...v2.3.0
