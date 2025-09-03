@@ -1,3 +1,13 @@
+<a name="v2.6.0"></a>
+## [v2.6.0] - 2025-09-03
+### Documentation Updates
+- Update README docs to the latest version of the action.
+
+<a name="v2.5.2"></a>
+## [v2.5.2] - 2025-09-03
+### Features
+- Add changeTrackingCreateEvent support to track any change events.
+
 <a name="v2.5.1"></a>
 ## [v2.5.1] - 2024-09-04
 ### Bug Fixes
