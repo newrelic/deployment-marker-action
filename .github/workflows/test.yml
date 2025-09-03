@@ -122,7 +122,7 @@ jobs:
       - name: Set entity name
         id: set_entity_name
         run: |
-          # Check if ENTITY_NAME is in the environment (from .env)
+          # Check if NEW_RELIC_ENTITY_NAME is in the environment (from .env)
           if [ -n "${{ env.NEW_RELIC_ENTITY_NAME }}" ]; then
             echo "ENTITY_NAME=${{ env.NEW_RELIC_ENTITY_NAME }}" >> $GITHUB_ENV
           else
