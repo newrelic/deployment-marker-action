@@ -54,10 +54,10 @@ This will create a `Deployment` event. |
 | `deploymenttype` | no       | `BASIC`        | The type of deployment. Choose from BASIC, BLUE_GREEN, CANARY, OTHER, ROLLING, or SHADOW.                                                       |
 | `description`    | no       | -              | A high-level description of this deployment, visible in the Overview page and on the Deployments page when you select an individual deployment. |
 | `groupid`        | no       | -              | A group ID for the deployment to link to other deployments.                                                                                     |
-| `guid`           | no       | -              | The entity GUID to apply the deployment marker.                                                                                                 |
+| `guid`           | yes      | -              | The entity GUID to apply the deployment marker.                                                                                                 |
 | `region`         | no       | `US`           | The region of your New Relic account. Default: `US`                                                                                             |
 | `user`           | no       | `github.actor` | A username to associate with the deployment, visible in the Overview page and on the Deployments page.                                          |
-| `version`        | no       | -              | Metadata to apply to the deployment marker - e.g. the latest release tag                                                                        ||
+| `version`        | yes      | -              | Metadata to apply to the deployment marker - e.g. the latest release tag                                                                        ||
 
 ## Example usage
 
