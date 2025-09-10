@@ -48,16 +48,16 @@ This will create a `Deployment` event. |
 | Key              | Required | Default        | Description                                                                                                                                     |
 |------------------|----------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | `apiKey`         | yes      | -              | Your New Relic [personal API key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#personal-api-key).        |
-| `guid`           | yes      | -              | The entity GUID to apply the deployment marker.                                                                                                 |
-| `user`           | no       | `github.actor` | A username to associate with the deployment, visible in the Overview page and on the Deployments page.                                          |
-| `version`        | yes      | -              | Metadata to apply to the deployment marker - e.g. the latest release tag                                                                        |
 | `changelog`      | no       | -              | A summary of what changed in this deployment, visible in the Deployments page.                                                                  |
 | `commit`         | no       | -              | The Commit SHA for this deployment, visible in the Deployments page.                                                                            |
 | `deeplink`       | no       | -              | A deep link to the source which triggered the deployment.                                                                                       |
 | `deploymenttype` | no       | `BASIC`        | The type of deployment. Choose from BASIC, BLUE_GREEN, CANARY, OTHER, ROLLING, or SHADOW.                                                       |
 | `description`    | no       | -              | A high-level description of this deployment, visible in the Overview page and on the Deployments page when you select an individual deployment. |
 | `groupid`        | no       | -              | A group ID for the deployment to link to other deployments.                                                                                     |
+| `guid`           | yes      | -              | The entity GUID to apply the deployment marker.                                                                                                 |
 | `region`         | no       | `US`           | The region of your New Relic account. Default: `US`                                                                                             |
+| `user`           | no       | `github.actor` | A username to associate with the deployment, visible in the Overview page and on the Deployments page.                                          |
+| `version`        | yes      | -              | Metadata to apply to the deployment marker - e.g. the latest release tag                                                                        ||
 
 ## Example usage
 

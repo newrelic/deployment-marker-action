@@ -12,7 +12,7 @@ inputs:
     required: true
   guid:
     description: 'Your New Relic entity GUID. This entity GUID should be for the entity you are tracking.'
-    required: true
+    required: false
   version:
     description: 'Custom version information to add to the deployment marker - e.g. the latest tag.'
     required: false
