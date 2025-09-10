@@ -82,7 +82,7 @@ jobs:
       - name: Set Release Version from Tag
         run: echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
       - name: Test change event deployment marker
-        uses: newrelic/deployment-marker-action@v2.6.0
+        uses: newrelic/deployment-marker-action@v2.6.1
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           commandType: "changeTrackingCreateEvent"
@@ -121,7 +121,7 @@ jobs:
         run: echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
       # This step creates a new Change Tracking Marker
       - name: New Relic Application Deployment Marker
-        uses: newrelic/deployment-marker-action@v2.6.0
+        uses: newrelic/deployment-marker-action@v2.6.1
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           region: "US"
@@ -157,7 +157,7 @@ jobs:
         run: echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
       # This step creates a new Change Tracking Marker for App123
       - name: App123 Marker
-        uses: newrelic/deployment-marker-action@v2.6.0
+        uses: newrelic/deployment-marker-action@v2.6.1
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           region: "US"
@@ -171,7 +171,7 @@ jobs:
           user: "${{ github.actor }}"
       # This step creates a new Change Tracking Marker for App
       - name: App456 Marker
-        uses: newrelic/deployment-marker-action@v2.6.0
+        uses: newrelic/deployment-marker-action@v2.6.1
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           region: "US"
@@ -185,7 +185,7 @@ jobs:
           user: "${{ github.actor }}"
       # This step creates a new Change Tracking Marker for App789
       - name: App789 Marker
-        uses: newrelic/deployment-marker-action@v2.6.0
+        uses: newrelic/deployment-marker-action@v2.6.1
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           region: "US"
