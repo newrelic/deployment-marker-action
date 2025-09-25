@@ -66,7 +66,7 @@ if [ "${NEW_RELIC_COMMAND_TYPE}" = "changeTrackingCreateEvent" ]; then
         fi
       fi
 
-    if [ "${NEW_RELIC_CREATE_EVENT_CATEGORY}" != "FEATURE FLAG" ] && [ -n "${NEW_RELIC_CREATE_EVENT_FEATURE_FLAG_ID}" ]; then
+    if [ "${NEW_RELIC_CREATE_EVENT_CATEGORY}" != "Feature Flag" ] && [ -n "${NEW_RELIC_CREATE_EVENT_FEATURE_FLAG_ID}" ]; then
       echo "::error::'featureFlagId' is only valid for 'Feature Flag' category events."
       exit 1
     fi
