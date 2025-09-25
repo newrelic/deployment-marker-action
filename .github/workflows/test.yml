@@ -38,10 +38,10 @@ jobs:
           # Optional params
           changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"
           commit: "${{ github.sha }}"
-          deeplink: "https://example.com/deployment"
+          deepLink: "https://example.com/deployment"
           deploymenttype: "BASIC"
           description: "Automated Deployment via Github Actions"
-          groupid: "deploy-group-1"
+          groupId: "deploy-group-1"
           region: ${{ secrets.NEW_RELIC_REGION }}
           user: "${{ github.actor }}"
 
@@ -85,13 +85,12 @@ jobs:
           description: "Automated Release via Github Actions"
           entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
           featureFlagId: "feature-flag-1"
-          groupid: "deploy-group-1"
+          groupId: "deploy-group-1"
           region: ${{ secrets.NEW_RELIC_REGION }}
           shortDescription: "A Short description of the change event"
           timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"
           type: 'Basic'
           user: "${{ github.actor }}"
-          version: "deployment-marker-action-basic-test:${{ github.ref }}"
 
   # This job tests the change tracking create event with category 'DEPLOYMENT' and uses customAttributes file with JS object format.
   test_change_tracking_with_custom_attributes_file:
@@ -112,10 +111,10 @@ jobs:
           commandType: "changeTrackingCreateEvent"
           commit: "${{ github.sha }}"
           customAttributes: "./custom-attributes-sample.js"
-          deeplink: "https://example.com/deployment"
+          deepLink: "https://example.com/deployment"
           description: "Automated Release via Github Actions"
           entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
-          groupid: "deploy-group-1"
+          groupId: "deploy-group-1"
           region: ${{ secrets.NEW_RELIC_REGION }}
           shortDescription: "A Short description of the change event"
           timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"
@@ -156,10 +155,10 @@ jobs:
           commandType: "changeTrackingCreateEvent"
           commit: "${{ github.sha }}"
           customAttributes: "./custom-attributes-sample.js"
-          deeplink: "https://example.com/deployment"
+          deepLink: "https://example.com/deployment"
           description: "Automated Release via Github Actions"
           entitySearch: "name = '${{ env.ENTITY_NAME }}' and domain = 'APM' and type = 'APPLICATION'"
-          groupid: "deploy-group-1"
+          groupId: "deploy-group-1"
           region: ${{ secrets.NEW_RELIC_REGION }}
           shortDescription: "A Short description of the change event"
           timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"

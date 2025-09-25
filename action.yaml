@@ -29,7 +29,7 @@ inputs:
   commit:
     description: 'Commit for the deployment.'
     required: false
-  deeplink:
+  deepLink:
     description: 'Deep link referencing the deployment.'
     required: false
   deploymenttype:
@@ -40,7 +40,7 @@ inputs:
     description: 'The user creating the deployment. Default: `github.actor`'
     required: false
     default: '${{ github.actor }}'
-  groupid:
+  groupId:
     description: 'Group Id used to link deployments together.'
     required: false
 
@@ -89,9 +89,9 @@ runs:
     NEW_RELIC_DEPLOYMENT_CHANGE_LOG: ${{ inputs.changelog }}
     NEW_RELIC_DEPLOYMENT_COMMIT: ${{ inputs.commit}}
     NEW_RELIC_DEPLOYMENT_DESCRIPTION: ${{ inputs.description }}
-    NEW_RELIC_DEPLOYMENT_DEEPLINK: ${{ inputs.deeplink }}
+    NEW_RELIC_DEPLOYMENT_DEEPLINK: ${{ inputs.deepLink }}
     NEW_RELIC_DEPLOYMENT_TYPE: ${{ inputs.deploymenttype }}
-    NEW_RELIC_DEPLOYMENT_GROUP_ID: ${{ inputs.groupid }}
+    NEW_RELIC_DEPLOYMENT_GROUP_ID: ${{ inputs.groupId }}
 
     # --- NEW ENVIRONMENT VARIABLES FOR changeTrackingCreateEvent ---
     NEW_RELIC_COMMAND_TYPE: ${{ inputs.commandType }}

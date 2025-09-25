@@ -33,6 +33,44 @@ if [ "${NEW_RELIC_COMMAND_TYPE}" = "changeTrackingCreateEvent" ]; then
     fi
   fi
 
+  # -- Conditional validations based on Category type ---
+  if [ "${NEW_RELIC_CREATE_EVENT_CATEGORY}" != "Deployment" ]; then
+    invalid_fields=""
+        if [ -n "${NEW_RELIC_DEPLOYMENT_VERSION}" ]; then
+          invalid_fields="version"
+        fi
+        if [ -n "${NEW_RELIC_DEPLOYMENT_CHANGE_LOG}" ]; then
+          if [ -n "${invalid_fields}" ]; then
+            invalid_fields="${invalid_fields}, changelog"
+          else
+            invalid_fields="changelog"
+          fi
+        fi
+        if [ -n "${NEW_RELIC_DEPLOYMENT_COMMIT}" ]; then
+          if [ -n "${invalid_fields}" ]; then
+            invalid_fields="${invalid_fields}, commit"
+          else
+            invalid_fields="commit"
+          fi
+        fi
+        if [ -n "${NEW_RELIC_DEPLOYMENT_DEEPLINK}" ]; then
+          if [ -n "${invalid_fields}" ]; then
+            invalid_fields="${invalid_fields}, deepLink"
+          else
+            invalid_fields="deepLink"
+          fi
+        fi
+        if [ -n "${invalid_fields}" ]; then
+          echo "::error::${invalid_fields} can only be used with DEPLOYMENT events."
+          exit 1
+        fi
+      fi
+
+    if [ "${NEW_RELIC_CREATE_EVENT_CATEGORY}" != "FEATURE FLAG" ] && [ -n "${NEW_RELIC_CREATE_EVENT_FEATURE_FLAG_ID}" ]; then
+      echo "::error::'featureFlagId' is only valid for 'Feature Flag' category events."
+      exit 1
+    fi
+
   # --- Build the command string, conditionally adding optional fields ---
   command_str="newrelic changeTracking create \
     --category \"${NEW_RELIC_CREATE_EVENT_CATEGORY}\" \
