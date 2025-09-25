@@ -38,12 +38,31 @@ jobs:
           # Optional params
           changelog: "See https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md for details"
           commit: "${{ github.sha }}"
-          deeplink: "https://example.com/deployment"
+          deepLink: "https://example.com/deployment"
           deploymenttype: "BASIC"
           description: "Automated Deployment via Github Actions"
-          groupid: "deploy-group-1"
+          groupId: "deploy-group-1"
           region: ${{ secrets.NEW_RELIC_REGION }}
           user: "${{ github.actor }}"
+
+  # This job tests the change tracking create event with mandatory input fields.
+  test_change_tracking_basic_inputs:
+    runs-on: ubuntu-latest
+    name: Change Tracking - Basic Inputs
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Test change event deployment marker
+        uses: ./
+        with:
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          category: 'Deployment'
+          commandType: "changeTrackingCreateEvent"
+          entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
+          region: ${{ secrets.NEW_RELIC_REGION }}
+          type: 'Basic'
+          user: "${{ github.actor }}"
+          version: "deployment-marker-action-basic-test:${{ github.ref }}"
 
   # This job tests the change tracking create event with category 'Feature Flag' and uses customAttributes with JS object format.
   # For more details on change tracking event mutation, please refer to our [docs](https://docs.newrelic.com/docs/change-tracking/change-tracking-events/#change-tracking-event-mutation)
@@ -66,13 +85,12 @@ jobs:
           description: "Automated Release via Github Actions"
           entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
           featureFlagId: "feature-flag-1"
-          groupid: "deploy-group-1"
+          groupId: "deploy-group-1"
           region: ${{ secrets.NEW_RELIC_REGION }}
           shortDescription: "A Short description of the change event"
           timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"
           type: 'Basic'
           user: "${{ github.actor }}"
-          version: "deployment-marker-action-basic-test:${{ github.ref }}"
 
   # This job tests the change tracking create event with category 'DEPLOYMENT' and uses customAttributes file with JS object format.
   test_change_tracking_with_custom_attributes_file:
@@ -93,10 +111,10 @@ jobs:
           commandType: "changeTrackingCreateEvent"
           commit: "${{ github.sha }}"
           customAttributes: "./custom-attributes-sample.js"
-          deeplink: "https://example.com/deployment"
+          deepLink: "https://example.com/deployment"
           description: "Automated Release via Github Actions"
           entitySearch: "id='${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}'"
-          groupid: "deploy-group-1"
+          groupId: "deploy-group-1"
           region: ${{ secrets.NEW_RELIC_REGION }}
           shortDescription: "A Short description of the change event"
           timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"
@@ -115,10 +133,11 @@ jobs:
         id: timestamp
         run: echo "NOW_MS=$(date +%s%3N)" >> $GITHUB_OUTPUT
       - name: Load .env file
-        uses: aarcangeli/load-dotenv@v1 # This action loads the .env file
+        uses: aarcangeli/load-dotenv@v1.1.0 # This action loads the .env file
         with:
-          filename: .env
-        continue-on-error: true
+          filenames: .env
+          path: '.'
+          if-file-not-found: 'ignore'
       - name: Set entity name
         id: set_entity_name
         run: |
@@ -137,10 +156,10 @@ jobs:
           commandType: "changeTrackingCreateEvent"
           commit: "${{ github.sha }}"
           customAttributes: "./custom-attributes-sample.js"
-          deeplink: "https://example.com/deployment"
+          deepLink: "https://example.com/deployment"
           description: "Automated Release via Github Actions"
           entitySearch: "name = '${{ env.ENTITY_NAME }}' and domain = 'APM' and type = 'APPLICATION'"
-          groupid: "deploy-group-1"
+          groupId: "deploy-group-1"
           region: ${{ secrets.NEW_RELIC_REGION }}
           shortDescription: "A Short description of the change event"
           timestamp: "${{ steps.timestamp.outputs.NOW_MS }}"
