@@ -133,10 +133,11 @@ jobs:
         id: timestamp
         run: echo "NOW_MS=$(date +%s%3N)" >> $GITHUB_OUTPUT
       - name: Load .env file
-        uses: aarcangeli/load-dotenv@v1 # This action loads the .env file
+        uses: aarcangeli/load-dotenv@v1.1.0 # This action loads the .env file
         with:
-          filename: .env
-        continue-on-error: true
+          filenames: .env
+          path: '.'
+          if-file-not-found: 'ignore'
       - name: Set entity name
         id: set_entity_name
         run: |
