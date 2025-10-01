@@ -92,10 +92,10 @@ jobs:
           type: 'Basic'
           changelog: "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md"
           commit: "${{ github.sha }}"
-          deepLink: "https://example.com/deployment"
+          deeplink: "https://example.com/deployment"
           description: "Automated Release via Github Actions"
           user: "${{ github.actor }}"
-          groupId: "deploy-group-1"
+          groupid: "deploy-group-1"
           timestamp: "${{ github.event.release.published_at }}"
           customAttributes: '{cloud_vendor: "vendor_name", region: "us-east-1", isProd: true, instances: 2}'
 ```
@@ -167,7 +167,7 @@ jobs:
           commit: "${{ github.sha }}"
           description: "Automated Release via Github Actions"
           deploymenttype: "ROLLING"
-          groupId: "Workshop App Release: ${{ github.ref_name }}"
+          groupid: "Workshop App Release: ${{ github.ref_name }}"
           user: "${{ github.actor }}"
       # This step creates a new Change Tracking Marker for App
       - name: App456 Marker
@@ -181,7 +181,7 @@ jobs:
           commit: "${{ github.sha }}"
           description: "Automated Release via Github Actions"
           deploymenttype: "ROLLING"
-          groupId: "Workshop App Release: ${{ github.ref_name }}"
+          groupid: "Workshop App Release: ${{ github.ref_name }}"
           user: "${{ github.actor }}"
       # This step creates a new Change Tracking Marker for App789
       - name: App789 Marker
@@ -195,7 +195,7 @@ jobs:
           commit: "${{ github.sha }}"
           description: "Automated Release via Github Actions"
           deploymenttype: "ROLLING"
-          groupId: "Workshop App Release: ${{ github.ref_name }}"
+          groupid: "Workshop App Release: ${{ github.ref_name }}"
           user: "${{ github.actor }}"
       # When chaining steps together, the deployment id is placed into the GitHub environment 
       - name: View output
