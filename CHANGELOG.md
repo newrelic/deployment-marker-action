@@ -1,3 +1,8 @@
+<a name="v2.6.2"></a>
+## [v2.6.2] - 2025-10-07
+### Bug Fixes
+- Fix change tracking issue with timestamp
+
 <a name="v2.6.1"></a>
 ## [v2.6.1] - 2025-09-10
 ### Bug Fixes
@@ -93,7 +98,8 @@
 ### Features
 - New Relic deployment marker action
 
-[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v2.6.1...HEAD
+[Unreleased]: https://github.com/newrelic/deployment-marker-action/compare/v2.6.2...HEAD
+[v2.6.2]: https://github.com/newrelic/deployment-marker-action/compare/v2.6.1...v2.6.2
 [v2.6.1]: https://github.com/newrelic/deployment-marker-action/compare/v2.6.0...v2.6.1
 [v2.6.0]: https://github.com/newrelic/deployment-marker-action/compare/v2.5.2...v2.6.0
 [v2.5.2]: https://github.com/newrelic/deployment-marker-action/compare/v2.5.1...v2.5.2
