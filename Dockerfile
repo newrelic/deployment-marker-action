@@ -1,4 +1,4 @@
-FROM newrelic/cli:v0.104.0
+FROM newrelic/cli:v0.104.5
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 # COPY entrypoint.sh /entrypoint.sh
